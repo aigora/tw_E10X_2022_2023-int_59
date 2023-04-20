@@ -4,7 +4,10 @@
 
 ## Integrantes del equipo
 
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+[Mario Hernández González - maarioo13
+ Iván Correas Expósito - 
+ Raúl Martín Mitre - Ralul55
+ Manuel Collado Jiménez - ]
 
 ## Objetivos del trabajo
 
