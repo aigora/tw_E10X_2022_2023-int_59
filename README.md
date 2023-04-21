@@ -4,10 +4,10 @@
 
 ## Integrantes del equipo
 
-[Mario Hernández González - maarioo13 //
- Iván Correas Expósito -  // 
+ Mario Hernández González - maarioo13 //
+ Iván Correas Expósito - Ivan-Correas-Exposito // 
  Raúl Martín Mitre - Ralul55 // 
- Manuel Collado Jiménez - ]
+ Manuel Collado Jiménez - mcallado 
 
 ## Objetivos del trabajo
 
