@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[])
 {
-    int b = 69;
-    int a;
+    int b = 10;
+    int k = 20;
     return 0;
 }
