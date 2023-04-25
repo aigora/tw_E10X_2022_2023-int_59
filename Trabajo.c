@@ -28,7 +28,7 @@ int main()
 
         printf("\n Elige una opcion: ");
         scanf("%d", &OP);
-        system("cls");
+       
         switch (OP)
         {
         case 1:
