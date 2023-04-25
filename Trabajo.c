@@ -26,6 +26,7 @@ int main()
         printf("4 - Datos \n");
         printf("5 - Salir del menu \n");
 
+        printf("\n Elige una opcion: ");
         scanf("%d", &OP);
         system("cls");
         switch (OP)
