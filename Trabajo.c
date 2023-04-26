@@ -1,19 +1,55 @@
 #include <stdio.h>
-
+typedef struct
+{
+	int ano;
+	int mes;
+}fecha;
+typedef struct
+{
+	int fechaNac = fecha;
+	float hidraulica;
+	float turbinacion;
+	float nuclear;
+	float carbon;
+	float gas;
+	float motores diesel;
+	float turbinas de gas;
+	float turbina de vapor;
+	float ciclo combinado;
+	float hidroeolica;
+	float eolica;
+	float solar fotovoltaica;
+	float solar termica;
+	float otras renovables;
+	float cogeneracion;
+	float residuos renovables;
+	float residuos no renovables;
+	float generacion total;
+}datos;
 int main()
 {
+	//Lectura del fichero
+	char c;
+	char w[10];
+	int i;
+	datos dato[300];
     FILE *pf;
     pf = fopen("generacion_21_22.txt", "r");
 
     if (pf == NULL)
     {
-        printf("Error \n");
+        printf("Error al abrir el fichero \n");
         return -1;
     }
     else
     {
-        printf("Abierto \n");
-        fclose(pf);
+        printf("Fichero abierto correctamente \n");
+        if(fscanf(pf, "%9", &w) == 'idráulica')
+       for(i = 0; i < 24; i++)
+       {
+       	fscanf(pf, ",%f,", dato.hidraulica[i]);
+       }
+
     }
     
     //Menú
