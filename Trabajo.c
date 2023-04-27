@@ -1,38 +1,38 @@
 #include <stdio.h>
-typedef struct
+struct fechas
 {
 	int ano;
 	int mes;
-}fecha;
-typedef struct
+};
+struct datos
 {
-	int fechaNac = fecha;
+	struct fechas fecha;
 	float hidraulica;
 	float turbinacion;
 	float nuclear;
 	float carbon;
 	float gas;
-	float motores diesel;
-	float turbinas de gas;
-	float turbina de vapor;
-	float ciclo combinado;
+	float motoresDiesel;
+	float turbinasDeGas;
+	float turbinaDeVapor;
+	float cicloCombinado;
 	float hidroeolica;
 	float eolica;
-	float solar fotovoltaica;
-	float solar termica;
-	float otras renovables;
+	float solarFotovoltaica;
+	float solarTermica;
+	float otrasRenovables;
 	float cogeneracion;
-	float residuos renovables;
-	float residuos no renovables;
-	float generacion total;
-}datos;
+	float residuosRenovables;
+	float residuosNoRenovables;
+	float generacionTotal;
+};
 int main()
 {
 	//Lectura del fichero
-	char c;
+	char caracteres[2000];
 	char w[10];
 	int i;
-	datos dato[300];
+	struct datos dato[300];
     FILE *pf;
     pf = fopen("generacion_21_22.txt", "r");
 
@@ -44,15 +44,17 @@ int main()
     else
     {
         printf("Fichero abierto correctamente \n");
-        if(fscanf(pf, "%9", &w) == 'idráulica')
-       for(i = 0; i < 24; i++)
-       {
-       	fscanf(pf, ",%f,", dato.hidraulica[i]);
-       }
-
+		
+		//AquÃ­ se lee el fichero ENTERO, ahora solo queda guardar los datos que se leen de forma ordenada.
+		while(fgets(caracteres, 2000, pf))
+		{
+			fscanf(pf, "%s", caracteres);
+			printf("%s", caracteres);
+		}
+		fclose(pf);
     }
     
-    //Menú
+    //Menï¿½
     int OP;
     do
     {
