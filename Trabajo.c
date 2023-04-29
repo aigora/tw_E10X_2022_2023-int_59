@@ -29,9 +29,9 @@ struct datos
 int main()
 {
 	//Lectura del fichero
-	char caracteres[2000];
+	char linea[2000];
 	char w[10];
-	int i;
+	int i, counter = 1, linea_seleccionada;
 	struct datos dato[300];
     FILE *pf;
     pf = fopen("generacion_21_22.txt", "r");
@@ -44,13 +44,6 @@ int main()
     else
     {
         printf("Fichero abierto correctamente \n");
-		
-		//Aquí se lee el fichero ENTERO, ahora solo queda guardar los datos que se leen de forma ordenada.
-		while(fgets(caracteres, 2000, pf))
-		{
-			fscanf(pf, "%s", caracteres);
-			printf("%s", caracteres);
-		}
 		fclose(pf);
     }
     
@@ -60,7 +53,7 @@ int main()
     {
 	    do
 	    {
-	    	printf("1 - Datos \n");
+	    	printf("1 - Ver Datos \n");
 	    	printf("2 - Datos \n");
 	    	printf("3 - Datos \n");
 	    	printf("4 - Datos \n");
@@ -73,7 +66,42 @@ int main()
 	    switch (OP)
 	    {
 	    case 1:
-	        //algo
+		    pf = fopen("generacion_21_22.txt", "r");
+		    OP = 0;
+	        printf("1 - Ver datos por filas: \n");
+			printf("2 - Ver datos de otra forma: \n");
+			printf("3 - Ver todos los datos: \n");
+			printf("Elige una opcion: ");
+			scanf("%i", &OP);
+			switch (OP)
+			{
+			    case 1:
+				    //Ver datos por filas
+			        printf("\nNumero de fila que se desea leer: ");
+			        scanf("%i", &linea_seleccionada);
+			        while(fgets(linea, 100, pf) != NULL)
+				    {
+						if(counter == linea_seleccionada)
+						{
+							printf("La linea %i es:  %s", counter, linea);
+						}
+					    counter++;
+				    }
+				    break;
+			    case 2:
+				    break;
+				case 3: 
+				    //Ver todos los datos
+		            while(fgets(linea, 2000, pf) != NULL)
+		            {
+			            fscanf(pf, "%s", linea);
+			            printf("%s", linea);
+		            }
+					break;
+			    default:
+				    break;
+			}
+			fclose(pf);
 	        break;
 	
 	    case 2:
@@ -100,4 +128,5 @@ int main()
     
     return 0;
 }
+
 
