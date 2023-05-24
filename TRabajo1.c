@@ -34,7 +34,7 @@ int main()
 	fichero_esp esp[300];
 	int i;
 	FILE *fichero;
-	fichero = fopen("C:/Users/User/Desktop/fichero_final.txt", "r");
+	fichero = fopen("fichero_final.txt", "r");
 	if(fichero == NULL)
 	{
 		printf("Error al abrir el archivo\n");
