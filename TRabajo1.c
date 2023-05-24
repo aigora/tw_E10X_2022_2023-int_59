@@ -29,12 +29,13 @@ typedef struct
 int menu(int seguir);
 int seleccion(int seguir);
 
+
 int main()
 {
 	fichero_esp esp[300];
 	int i;
 	FILE *fichero;
-	fichero = fopen("C:/Users/User/Desktop/fichero_final.txt", "r");
+	fichero = fopen("fichero_final.txt", "r");
 	if(fichero == NULL)
 	{
 		printf("Error al abrir el archivo\n");
@@ -132,7 +133,7 @@ int seleccion(int seguir)
 	    printf("Pulse 1 si desea volver al menu principal. \n");
         printf("Pulse 0 si desea salir del programa. \n");
         printf(" \n Seleccione su opcion: ");
-        scanf("%d \n", &OP);  
+        scanf("%d", &OP);  
 	}
 	while((OP!=1)&&(OP!=0));
 	   
