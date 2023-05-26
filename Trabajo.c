@@ -110,27 +110,10 @@ char* mostrarDatos ()
 	fichero_esp esp[300];
 	FILE *fichero;
 	fichero = fopen("fichero_final.txt", "r");
-
-	//Seleccionar una opcion para leer los datos
-	    printf("1- Ver datos de un cierto grupo de energías.\n");
-	    printf("2- Ver todos los datos.\n");
-	    printf("Elige una opción: ");
-	    scanf("%i", &OP);
-	    //Si te pasas o te quedas corto lo repite
-	    while (linea_seleccionada < 1)
-	    {
-	    	printf("1- Ver datos de un cierto grupo de energías.\n");
-	        printf("2- Ver todos los datos.\n");
-	        printf("Elige una opción: ");
-	        scanf("%i", &OP);
-	    }
-	    while (linea_seleccionada > 2)
-	    {
-	    	printf("1- Ver datos de un cierto grupo de energías.\n");
-	        printf("2- Ver todos los datos.\n");
-	        printf("Elige una opción: ");
-	        scanf("%i", &OP);
-	    }
+	printf("1- Ver datos de un cierto grupo de energías.\n");
+	printf("2- Ver todos los datos.\n");
+	printf("Elige una opción: ");
+	scanf("%i", &OP);
 	switch (OP)
 	{
 	case 1:
