@@ -3,30 +3,30 @@
 typedef struct
 {
 	char tipo[50];
-	float enero;
-	float febrero;
-	float marzo;
-	float abril;
-	float mayo;
-	float junio;
-	float julio;
-	float agosto;
-	float septiembre;
-	float octubre;
-	float noviembre;
-	float diciembre;
-	float enero2;
-	float febrero2;
-	float marzo2;
-	float abril2;
-	float mayo2;
-	float junio2; 
-	float julio2;
-	float agosto2;
-	float septiembre2;
-	float octubre2;
-	float noviembre2;
-	float diciembre2;
+	float enero_21;
+	float febrero_21;
+	float marzo_21;
+	float abril_21;
+	float mayo_21;
+	float junio_21;
+	float julio_21;
+	float agosto_21;
+	float septiembre_21;
+	float octubre_21;
+	float noviembre_21;
+	float diciembre_21;
+	float enero_22;
+	float febrero_22;
+	float marzo_22;
+	float abril_22;
+	float mayo_22;
+	float junio_22;
+	float julio_22;
+	float agosto_22;
+	float septiembre_22;
+	float octubre_22;
+	float noviembre_22;
+	float diciembre_22;
 }fichero_esp;
 
 char* mostrarDatos (void);
@@ -49,11 +49,11 @@ int main()
 		for(i=0; i<18; i++)
 		{
 			fscanf(fichero, "%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f",
-			esp[i].tipo, &esp[i].enero, &esp[i].febrero, &esp[i].marzo, &esp[i].abril, &esp[i].mayo,
-			&esp[i].junio, &esp[i].julio, &esp[i].agosto, &esp[i].septiembre, &esp[i].octubre,
-			&esp[i].noviembre, &esp[i].diciembre, &esp[i].enero2, &esp[i].febrero2, &esp[i].marzo2,
-			&esp[i].abril2, &esp[i].mayo2, &esp[i].junio2, &esp[i].julio2, &esp[i].agosto2,
-			&esp[i].septiembre2, &esp[i].octubre2, &esp[i].noviembre2, &esp[i].diciembre2);
+			esp[i].tipo, &esp[i].enero_21, &esp[i].febrero_21, &esp[i].marzo_21, &esp[i].abril_21, &esp[i].mayo_21,
+			&esp[i].junio_21, &esp[i].julio_21, &esp[i].agosto_21, &esp[i].septiembre_21, &esp[i].octubre_21,
+			&esp[i].noviembre_21, &esp[i].diciembre_21, &esp[i].enero_22, &esp[i].febrero_22, &esp[i].marzo_22,
+			&esp[i].abril_22, &esp[i].mayo_22, &esp[i].junio_22, &esp[i].julio_22, &esp[i].agosto_22,
+			&esp[i].septiembre_22, &esp[i].octubre_22, &esp[i].noviembre_22, &esp[i].diciembre_22);
 		}
 		fclose(fichero);
 	}
