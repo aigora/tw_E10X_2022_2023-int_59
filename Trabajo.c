@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct
 {
@@ -30,13 +32,17 @@ typedef struct
 }fichero_esp;
 
 char* mostrarDatos (void);
+double calcularMediaGrupo (char* archivo, char* grupo);
 
 int main()
 {
-	int i;
+	//Variables para la opcion de calculos estadisticos
+	int i, opcionEstadistica = 0;
+	char grupo[100];
+
+
     fichero_esp esp[300];
 	FILE *fichero;
-
 	//Aquí abrimos el fichero y nos aseguramos de que existe
 	fichero = fopen("fichero_final.txt", "r");
 	if(fichero == NULL)
@@ -65,7 +71,7 @@ int main()
 	    do
 	    {
 	    	printf("1 - Ver Datos \n");
-	    	printf("2 - Datos \n");
+	    	printf("2 - Calculos estadísticos \n");
 	    	printf("3 - Datos \n");
 	    	printf("4 - Datos \n");
 	    	printf("5 - Salir del menu \n");
@@ -82,7 +88,19 @@ int main()
 	        break;}
 	
 	    case 2:
-	        //Algo
+	        printf("1- Media\n2- Variacion\n3- Desviacion Tipica\n");
+			printf("Selecciona una opcion: ");
+			scanf("%i", &opcionEstadistica);
+
+			//Codigo para la media
+			if (opcionEstadistica = 1)
+			{
+				char archivo[] = "fichero_final.txt";
+				printf("\nEscriba el grupo del que desea conocer la media (Si el nombre tiene espacios escribalo asi: ResiduosRenovables): ");
+				scanf("%s", grupo);
+				double resultadoMedia = calcularMediaGrupo (archivo, grupo);
+				printf("La media del grupo %s es: %.2f\n", grupo, resultadoMedia);
+			}
 	        break;
 	
 	    case 3:

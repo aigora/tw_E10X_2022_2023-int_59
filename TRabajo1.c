@@ -29,13 +29,11 @@ typedef struct
 int menu(int seguir);
 int seleccion(int seguir);
 
-
 int main()
 {
 	fichero_esp esp[300];
 	int i;
 	FILE *fichero;
-	//Aquí abrimos el fichero y nos aseguramos de que existe
 	fichero = fopen("fichero_final.txt", "r");
 	if(fichero == NULL)
 	{
@@ -43,15 +41,10 @@ int main()
 	}
 	else
 	{
-		//Aquí leemos todos los datos del fichero y los almacenamos en una estructura
 		for(i=0; i<18; i++)
 		{
-			fscanf(fichero, "%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f", 
-			&esp[i].enero, &esp[i].febrero, &esp[i].marzo, &esp[i].abril, &esp[i].mayo, &esp[i].junio, 
-			&esp[i].julio, &esp[i].agosto, &esp[i].septiembre, &esp[i].octubre, &esp[i].noviembre, 
-			&esp[i].diciembre, &esp[i].enero2, &esp[i].febrero2, &esp[i].marzo2, &esp[i].abril2, 
-			&esp[i].mayo2, &esp[i].junio2, &esp[i].julio2, &esp[i].agosto2, &esp[i].septiembre2, 
-			&esp[i].octubre2, &esp[i].noviembre2, &esp[i].diciembre2);
+			fscanf(fichero, "%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f", &esp[i].enero, &esp[i].febrero, &esp[i].marzo, &esp[i].abril, &esp[i].mayo, &esp[i].junio, &esp[i].julio, &esp[i].agosto, &esp[i].septiembre, &esp[i].octubre, &esp[i].noviembre, &esp[i].diciembre,
+			       &esp[i].enero2, &esp[i].febrero2, &esp[i].marzo2, &esp[i].abril2, &esp[i].mayo2, &esp[i].junio2, &esp[i].julio2, &esp[i].agosto2, &esp[i].septiembre2, &esp[i].octubre2, &esp[i].noviembre2, &esp[i].diciembre2);
 		}
 		fclose(fichero);
 	}
@@ -139,7 +132,7 @@ int seleccion(int seguir)
 	    printf("Pulse 1 si desea volver al menu principal. \n");
         printf("Pulse 0 si desea salir del programa. \n");
         printf(" \n Seleccione su opcion: ");
-        scanf("%d", &OP);  
+        scanf("%d \n", &OP);  
 	}
 	while((OP!=1)&&(OP!=0));
 	   
