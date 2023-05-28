@@ -33,6 +33,7 @@ double maximo(double datos[], int tam_vector);
 void meses();//funcion para imprimir todos los meses 
 
 
+
 int main()
 {
 	int i, j, eleccion;
@@ -50,7 +51,7 @@ int main()
 	else
 	{
 		//Aqu√≠ leemos todos los datos del fichero y los almacenamos en una estructura
-		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaciÔøΩn de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
+		for(i=0; i<18; i++)
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[2][0], &esp[i].datos_meses[2][1], &esp[i].datos_meses[2][2], &esp[i].datos_meses[2][3], &esp[i].datos_meses[2][4],
@@ -72,7 +73,7 @@ int main()
 	else
 	{
 		//Aqu√≠ leemos todos los datos del fichero y los almacenamos en una estructura
-		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaciÛn de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
+		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en una matriz donde las filas indican los aÒos y las columnas los meses
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[0][0], &esp[i].datos_meses[0][1], &esp[i].datos_meses[0][2], &esp[i].datos_meses[0][3], &esp[i].datos_meses[0][4],
