@@ -31,14 +31,18 @@ typedef struct
 	float diciembre_22;
 }fichero_esp;
 
+void tipos_energia();//funcion para imprimir todos los tipos de energia (se utiliza bastante)
+
 char* mostrarDatos (void);
 
 double calcularMediaGrupo (char* archivo, char* grupo);
 
+double varianza(int datos[100]);
+
 int main()
 {
 	//Variables para la opcion de calculos estadisticos
-	int i, opcionEstadistica = 0;
+	int i;
 	char grupo[100];
 
 
@@ -65,13 +69,19 @@ int main()
 		fclose(fichero);
 	}
     
-    //Menï¿½
+    //Menu
     int OP;
+    printf("_____________________________________________________________\n\n");
+	printf("		    GENERACION DE ENERGIA");
+	printf("\n_____________________________________________________________\n\n\n");
     do
     {
 	    do
 	    {
-	    	printf("1 - Ver Datos \n");
+	    	printf("______________________________\n\n");
+			printf("             MENU");
+			printf("\n______________________________\n\n\n");
+	    	printf("1 - Consultar Datos \n");
 	    	printf("2 - Calculos estadisticos \n");
 	    	printf("3 - Datos \n");
 	    	printf("4 - Datos \n");
@@ -91,21 +101,63 @@ int main()
 	        break;}
 	
 	    case 2:
-	        printf("1- Media\n2- Varianza\n3- Desviacion Tipica\n");
-			printf("\nSelecciona una opcion: ");
-			scanf("%i", &opcionEstadistica);
-			printf("\n_____________________________________________________________\n\n");
-			
-			//Codigo para la media
-			if (opcionEstadistica = 1)
-			{
-				char archivo[] = "fichero_final.txt";
-				printf("\n 1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total");
-				printf("\n\nEscriba el grupo del que desea conocer la media (Si el nombre tiene espacios escribalo asi: ResiduosRenovables): ");
-				scanf("%s", grupo);
-				double resultadoMedia = calcularMediaGrupo (archivo, grupo);
-				printf("\nLa media del grupo %s es: %.2f", grupo, resultadoMedia);
+	        do
+	        {
+	        	printf("1- Media\n2- Varianza\n3- Desviacion Tipica\n");
+				printf("\nSelecciona una opcion: ");
+				scanf("%i", &OP);
 				printf("\n_____________________________________________________________\n\n");
+			}
+			while((OP!=1)&&(OP!=2)&&(OP!=3));
+			
+			
+			//Codigo para la media, varianza y desviacion tipica
+			switch (OP)
+			{
+				case 1:
+				{
+					char archivo[] = "fichero_final.txt";
+					tipos_energia();
+					printf("Escriba el grupo del que desea conocer la media (Si el nombre tiene espacios escribalo asi: ResiduosRenovables): ");
+					scanf("%s", grupo);
+					double resultadoMedia = calcularMediaGrupo (archivo, grupo);
+					printf("\nLa media del grupo %s es: %.2f", grupo, resultadoMedia);
+					printf("\n_____________________________________________________________\n\n");
+					
+					break;
+				}
+				case 2:
+				{
+					do
+			        {
+			        	printf("¿Que varianza quieres calcular?\n\n1-Varianza total\n2-Por meses\n3-Varios tipos de energia");
+						printf("\n\nElige una opcion: ");
+						scanf("%i", &OP);
+						printf("\n_____________________________________________________________\n\n");
+					}
+					while((OP!=1)&&(OP!=2)&&(OP!=3));
+					
+					if (OP==1)
+					{
+						tipos_energia();
+					}
+					
+					if (OP==2)
+					{
+					}
+					
+					if (OP==3)
+					{
+					}
+					
+					break;
+				}
+					
+				
+				case 3:
+				{
+					break;
+				}
 			}
 	        break;
 	
@@ -126,6 +178,11 @@ int main()
     return 0;
 }
 
+void tipos_energia()
+{
+	printf("\n 1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total\n\n");
+}
+
 //FunciÃ³n para mostrar los datos del fichero
 char* mostrarDatos ()
 {
@@ -143,20 +200,20 @@ char* mostrarDatos ()
 	{
 	case 1:
 		//Ver datos por filas
-		printf("\n 1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total");
-		printf("\n Datos que quieres ver: ");
+		tipos_energia();
+		printf(" Datos que quieres ver: ");
 		scanf("%i", &linea_seleccionada);
 		//Si se pasa o se queda corto lo repite
 		while (linea_seleccionada < 1)
 		{
-			printf("\n 1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total");
-		    printf("\n Datos que quieres ver: ");
+			tipos_energia();
+		    printf(" Datos que quieres ver: ");
 		    scanf("%i", &linea_seleccionada);
 		}
 		while (linea_seleccionada > 18)
 		{
-			printf("1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total");
-		    printf("\n Datos que quieres ver: ");
+			tipos_energia();
+		    printf(" Datos que quieres ver: ");
 		    scanf("%i", &linea_seleccionada);
 		}
 		
