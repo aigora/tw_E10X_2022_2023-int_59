@@ -26,6 +26,9 @@ double media(double datos[], int tam_vector);
 
 double varianza(double datos[], int tam_vector);
 
+double maximo(double datos[], int tam_vector);
+
+void meses();//funcion para imprimir todos los meses 
 
 
 int main()
@@ -45,7 +48,7 @@ int main()
 	else
 	{
 		//Aquí leemos todos los datos del fichero y los almacenamos en una estructura
-		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaci�n de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
+		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaci�n de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[0], &esp[i].datos_meses[1], &esp[i].datos_meses[2], &esp[i].datos_meses[3], &esp[i].datos_meses[4],
@@ -72,7 +75,7 @@ int main()
 			printf("\n______________________________\n\n\n");
 	    	printf("1 - Consultar Datos \n");
 	    	printf("2 - Calculos estadisticos \n");
-	    	printf("3 - Datos \n");
+	    	printf("3 - Analisis de datos\n");
 	    	printf("4 - Datos \n");
 	    	printf("5 - Salir del menu \n");
 	    	printf("\n Elige una opcion: ");
@@ -209,9 +212,173 @@ int main()
 	        break;
 	
 	    case 3:
-	        //Algo
-	        break;
-	
+	    {
+			//Máximos y mínimos
+	        do
+			{
+			    printf("�Que analisis quieres hacer?\n\n1-Produccion maxima\n2-Produccion minima");
+				printf("\n\nElige una opcion: ");
+				scanf("%i", &OP);			
+				printf("\n_____________________________________________________________\n\n");
+			}
+			while((OP<1)||(OP>2));
+			switch (OP)
+			{  
+				case 1:
+				{
+					do
+					{
+			    		printf("Elige los datos a analizar\n\n1- Produccion maxima total\n2- Produccion maxima por meses\n3- Produccion maxima tipo de energia\n4- Produccion maxima especifica");
+						printf("\n\nElige una opcion: ");
+						scanf("%i", &OP);			
+						printf("\n_____________________________________________________________\n\n");
+					}
+					while((OP<1)||(OP>4));
+					switch (OP)
+					{
+						case 1:
+						{
+							float maximotot;
+							maximotot= 0;
+							for (i=0; i<17; i++)
+							{
+								if ((maximo(esp[i].datos_meses, sizeof(esp[i].datos_meses)/sizeof(double))) > maximotot)
+								{
+									maximotot = maximo(esp[i].datos_meses, sizeof(esp[i].datos_meses)/sizeof(double));
+								}
+								else{}
+							}
+							printf("\nMaximo: %f\n", maximotot);
+				
+							break;
+						}
+
+						case 2:
+						{
+							do
+							{
+								printf("Elige el mes para saber el maximo \n");
+								meses();
+								printf("Elige el mes: ");
+								scanf("%i", &OP);
+								printf("\n_____________________________________________________________\n\n");
+							} 
+							while ((OP<1)||(OP>24));
+
+							double *datos;
+							datos = malloc(17);
+
+							if (datos==NULL)
+							{
+							printf("Error: Memoria no disponible");
+							return -1;
+							}
+
+							eleccion = OP -1;
+							for (i=0; i<17; i++)
+							{
+								datos[i]=esp[i].datos_meses[eleccion];
+							}
+
+							printf("\nMaximo: %f\n", maximo(datos, 17));
+							free(datos);
+				
+							break;
+						}
+
+						case 3:
+						{
+							tipos_energia();
+							do
+							{
+								printf("Elige un tipo de energia: ");
+								scanf("%i", &eleccion);	
+								printf("\n_____________________________________________________________\n\n");
+							}
+							while ((eleccion<1)||(eleccion>18));
+							printf("\nMaximo: %f\n", maximo(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double)));
+
+							break;
+						}
+
+						case 4:
+						{
+							int num_meses;
+							info_mes *meses;
+						
+							tipos_energia();
+							printf("\nEstan disponibles los datos de todos los meses de 2021 y 2022.\n\n");
+							printf("Introduce el numero de meses de los que deseas calcular el maximo: ");
+							do
+							{
+								scanf("%i", &num_meses);
+							}
+							while ((num_meses<1)||(num_meses>24*18));//24 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
+						
+							meses=malloc(sizeof(info_mes)*num_meses);
+							if (meses==NULL)
+							{
+							printf("Error: Memoria no disponible");
+							return -1;
+							}	
+
+							printf("\nIntroduce los meses que desees de la forma: tipo_energia anho mes (ejemplo, hidraulica 2021 enero: 1 2021 1)\n");
+							for(i=0;i<num_meses;i++)//almacena los meses escogidos por el usuario en la variable-estructura meses
+							{
+								do
+								{
+									printf("Dato %i: ", i+1);
+									scanf("%i %i %i", &meses[i].tipo_energia, &meses[i].anho, &meses[i].mes);
+								}
+								while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2021)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
+							}
+
+							double *datos;
+							datos=malloc(sizeof(double)*num_meses);
+							if (datos==NULL)
+							{
+								printf("Error: Memoria no disponible");
+								return -1;
+							}
+
+							for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energ�a del mes escogido y almacena los datos de todos los meses en un unico vector 
+							{
+								if (meses[i].anho==2021)
+								{
+									datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes-1)];
+								}
+								else
+								{
+									datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes+12-1)];//si el anho escogido es 2022 hay que sumarle al mes 12 unidades para que sea el mes de 2022. Esto es asi debido a la forma en la que se orgaiza la informacion del fichero en la estructura
+								}
+							}
+
+							printf("\nMaximo: %f\n", maximo(datos, num_meses));
+							printf("\n_____________________________________________________________\n\n");
+						
+							free (meses);
+							free (datos);
+						    
+							break;
+						}
+					}
+
+					break;
+	            } 
+
+				case 2:
+				{
+					//algo
+					break;
+				}   
+
+				default:
+					break;  
+	     
+			}
+
+			break;
+		}
 	    case 4:
 	        //Algo
 	        break;
@@ -230,6 +397,12 @@ int main()
 void tipos_energia()
 {
 	printf("\nTIPOS DE ENERGIA\n\n 1- Hidraulica\n 2- Turbinacion bombeo\n 3- Nuclear\n 4- Carbon\n 5- Fuel y Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos no renovables\n 17- Residuos renovables\n 18- Generacion total\n\n");
+}
+
+void meses()
+{
+	printf("\n 1- Enero2021\n 2- Febrero2021\n 3- Marzo2021\n 4- Abril2021\n 5- Mayo2021\n 6- Junio2021\n 7- Julio2021\n 8- Agosto2021\n 9- Septiembre2021\n 10- Octubre2021\n 11- Noviembre2021\n 12- Diciembre2021\n");
+	printf("\n 13- Enero2022\n 14- Febrero2022\n 15- Marzo2022\n 16- Abril2022\n 17- Mayo2022\n 18- Junio2022\n 19- Julio2022\n 20- Agosto2022\n 21- Septiembre2022\n 22- Octubre2022\n 23- Noviembre2022\n 24- Diciembre2022\n");
 }
 
 //Función para mostrar los datos del fichero
@@ -333,4 +506,20 @@ double varianza(double datos[], int tam_vector)
 	varianza=varianza/tam_vector;
 	
 	return varianza;
+}
+
+double maximo(double datos[], int tam_vector)
+{
+	int i; 
+	double maximo=0;
+	for (i=0; i<tam_vector; i++)
+	{
+		if (datos[i]>maximo)
+		{
+			maximo = datos[i];
+		}
+		else{}
+
+	}
+	return maximo;
 }
