@@ -90,12 +90,12 @@ int main()
 	    case 2:
 	        do
 	        {
-	        	printf("1- Media\n2- Varianza y desviacion tipica\n");
+	        	printf("1- Media\n2- Varianza y desviacion tipica\n3- Volver\n");
 				printf("\nSelecciona una opcion: ");
 				scanf("%i", &OP);
 				printf("\n_____________________________________________________________\n\n");
 			}
-			while((OP<1)||(OP>2));
+			while((OP<1)||(OP>3));
 			
 			
 			//Codigo para la media, varianza y desviacion tipica
@@ -117,12 +117,12 @@ int main()
 				{
 					do
 			        {
-			        	printf("�Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n");
+			        	printf("�Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n3-Volver\n");
 						printf("\nElige una opcion: ");
 						scanf("%i", &OP);
 						printf("\n_____________________________________________________________\n\n");
 					}
-					while((OP<1)||(OP>2));
+					while((OP<1)||(OP>3));
 					
 					if (OP==1)
 					{
@@ -137,6 +137,7 @@ int main()
 						
 						printf("\nVarianza: %f\n", varianza(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double)));
 						printf("Desviacion tipica: %f\n\n", sqrt(varianza(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double))));
+						printf("\n_____________________________________________________________\n\n");
 					}
 					
 					if (OP==2)
@@ -191,7 +192,8 @@ int main()
 							}
 						}
 
-						printf("\nVarianza: %f\nDesviacion tipica: %f\n\n", varianza(datos, num_meses), sqrt(varianza(datos, num_meses)));
+						printf("\nVarianza: %f\nDesviacion tipica: %f\n", varianza(datos, num_meses), sqrt(varianza(datos, num_meses)));
+						printf("\n_____________________________________________________________\n\n");
 						
 						free (meses);
 						free (datos);
@@ -199,6 +201,8 @@ int main()
 					
 					break;
 				}
+				case 3:
+					break;
 			}
 	        break;
 	
