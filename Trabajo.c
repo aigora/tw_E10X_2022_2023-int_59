@@ -5,30 +5,7 @@
 typedef struct
 {
 	char tipo[50];
-	float enero_21;
-	float febrero_21;
-	float marzo_21;
-	float abril_21;
-	float mayo_21;
-	float junio_21;
-	float julio_21;
-	float agosto_21;
-	float septiembre_21;
-	float octubre_21;
-	float noviembre_21;
-	float diciembre_21;
-	float enero_22;
-	float febrero_22;
-	float marzo_22;
-	float abril_22;
-	float mayo_22;
-	float junio_22;
-	float julio_22;
-	float agosto_22;
-	float septiembre_22;
-	float octubre_22;
-	float noviembre_22;
-	float diciembre_22;
+	float datos_meses[24];
 }fichero_esp;
 
 void tipos_energia();//funcion para imprimir todos los tipos de energia (se utiliza bastante)
@@ -37,16 +14,15 @@ char* mostrarDatos (void);
 
 double calcularMediaGrupo (char* archivo, char* grupo);
 
-double varianza(int datos[100]);
+double varianza(int datos[]);
 
 int main()
 {
-	//Variables para la opcion de calculos estadisticos
-	int i;
+	int i, j, eleccion;
 	char grupo[100];
 
 
-    fichero_esp esp[300];
+    fichero_esp esp[18];
 	FILE *fichero;
 	//Aqu√≠ abrimos el fichero y nos aseguramos de que existe
 	fichero = fopen("fichero_final.txt", "r");
@@ -60,11 +36,11 @@ int main()
 		for(i=0; i<18; i++)
 		{
 			fscanf(fichero, "%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f",
-			esp[i].tipo, &esp[i].enero_21, &esp[i].febrero_21, &esp[i].marzo_21, &esp[i].abril_21, &esp[i].mayo_21,
-			&esp[i].junio_21, &esp[i].julio_21, &esp[i].agosto_21, &esp[i].septiembre_21, &esp[i].octubre_21,
-			&esp[i].noviembre_21, &esp[i].diciembre_21, &esp[i].enero_22, &esp[i].febrero_22, &esp[i].marzo_22,
-			&esp[i].abril_22, &esp[i].mayo_22, &esp[i].junio_22, &esp[i].julio_22, &esp[i].agosto_22,
-			&esp[i].septiembre_22, &esp[i].octubre_22, &esp[i].noviembre_22, &esp[i].diciembre_22);
+			esp[i].tipo, &esp[i].datos_meses[0], &esp[i].datos_meses[1], &esp[i].datos_meses[2], &esp[i].datos_meses[3], &esp[i].datos_meses[4],
+			&esp[i].datos_meses[5], &esp[i].datos_meses[6], &esp[i].datos_meses[7], &esp[i].datos_meses[8], &esp[i].datos_meses[9],
+			&esp[i].datos_meses[10], &esp[i].datos_meses[11], &esp[i].datos_meses[12], &esp[i].datos_meses[13], &esp[i].datos_meses[14],
+			&esp[i].datos_meses[15], &esp[i].datos_meses[16], &esp[i].datos_meses[17], &esp[i].datos_meses[18], &esp[i].datos_meses[19],
+			&esp[i].datos_meses[20], &esp[i].datos_meses[21], &esp[i].datos_meses[22], &esp[i].datos_meses[23]);
 		}
 		fclose(fichero);
 	}
@@ -140,6 +116,14 @@ int main()
 					if (OP==1)
 					{
 						tipos_energia();
+						printf("Elige un tipo de energÌa: ");
+						scanf("%i", &eleccion);
+						
+						float datos[24];
+						for(i=0;i<24;i++)
+						{
+							
+						}
 					}
 					
 					if (OP==2)
