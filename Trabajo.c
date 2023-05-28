@@ -117,7 +117,7 @@ int main()
 				{
 					do
 			        {
-			        	printf("¿Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n3-Volver\n");
+			        	printf("ï¿½Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n3-Volver\n");
 						printf("\nElige una opcion: ");
 						scanf("%i", &OP);
 						printf("\n_____________________________________________________________\n\n");
@@ -180,7 +180,7 @@ int main()
 							return -1;
 						}
 						
-						for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energía del mes escogido y almacena los datos de todos los meses en un unico vector 
+						for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energï¿½a del mes escogido y almacena los datos de todos los meses en un unico vector 
 						{
 							if (meses[i].anho==2021)
 							{
@@ -322,7 +322,7 @@ double calcularMediaGrupo (char* archivo, char* grupo)
 
 	if(contador == 0)
 	{
-		printf("No se encontró el grupo especificado.");
+		printf("No se encontrï¿½ el grupo especificado.");
 		return 0.0;
 	}
 
