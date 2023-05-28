@@ -30,8 +30,6 @@ double varianza(double datos[], int tam_vector);
 
 double maximo(double datos[], int tam_vector);
 
-void meses();//funcion para imprimir todos los meses 
-
 
 
 int main()
@@ -73,7 +71,7 @@ int main()
 	else
 	{
 		//Aquí leemos todos los datos del fichero y los almacenamos en una estructura
-		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en una matriz donde las filas indican los a�os y las columnas los meses
+		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en una matriz donde las filas indican los a�os y las columnas los meses
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[0][0], &esp[i].datos_meses[0][1], &esp[i].datos_meses[0][2], &esp[i].datos_meses[0][3], &esp[i].datos_meses[0][4],
@@ -86,6 +84,8 @@ int main()
 	}
     
     double vector_datos[48];
+	int num_meses;
+	info_mes *meses;
 	
     //Menu
     int OP;
@@ -176,8 +176,6 @@ int main()
 					
 					if (OP==2)
 					{
-						int num_meses;
-						info_mes *meses;
 						
 						tipos_energia();
 						printf("\nEstan disponibles los datos de todos los meses entre 2019 y 2022.\n\n");
@@ -271,9 +269,11 @@ int main()
 							maximotot= 0;
 							for (i=0; i<17; i++)
 							{
-								if ((maximo(esp[i].datos_meses, sizeof(esp[i].datos_meses)/sizeof(double))) > maximotot)
+								convertir_matriz_a_vector(esp[i].datos_meses, 4, 12, vector_datos);
+
+								if ((maximo(vector_datos, 48)) > maximotot)
 								{
-									maximotot = maximo(esp[i].datos_meses, sizeof(esp[i].datos_meses)/sizeof(double));
+									maximotot = maximo(vector_datos, 48);
 								}
 								else{}
 							}
@@ -284,15 +284,15 @@ int main()
 
 						case 2:
 						{
+							meses=malloc(sizeof(info_mes)*1);
 							do
 							{
-								printf("Elige el mes para saber el maximo \n");
-								meses();
-								printf("Elige el mes: ");
-								scanf("%i", &OP);
+								printf("\nIntroduce el mes que desees de la forma: anho mes (ejemplo, 2019 enero: 2019 1)\n");
+								printf("Dato: ");
+								scanf("%i %i", &meses[0].anho, &meses[0].mes);
 								printf("\n_____________________________________________________________\n\n");
 							} 
-							while ((OP<1)||(OP>24));
+							while ((meses[0].anho<2019)||(meses[0].anho>2022)||(meses[0].mes<1)||(meses[0].mes>12));
 
 							double *datos;
 							datos = malloc(17);
@@ -303,13 +303,20 @@ int main()
 							return -1;
 							}
 
-							eleccion = OP -1;
-							for (i=0; i<17; i++)
+							for (j=0;j<4;j++)
 							{
-								datos[i]=esp[i].datos_meses[eleccion];
+								if (meses[0].anho==(2019+j))
+								{
+									for (i=0; i<17; i++)
+									{
+										datos[i]=esp[i].datos_meses[j][meses[0].mes-1];
+										
+									}	
+								}
 							}
 
 							printf("\nMaximo: %f\n", maximo(datos, 17));
+							free(datos);
 							free(datos);
 				
 							break;
@@ -325,24 +332,26 @@ int main()
 								printf("\n_____________________________________________________________\n\n");
 							}
 							while ((eleccion<1)||(eleccion>18));
-							printf("\nMaximo: %f\n", maximo(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double)));
+
+							convertir_matriz_a_vector(esp[eleccion-1].datos_meses, 4, 12, vector_datos);
+
+							printf("\nMaximo: %f\n", maximo(vector_datos, 48));
+							printf("\n_____________________________________________________________\n\n");
 
 							break;
 						}
 
 						case 4:
 						{
-							int num_meses;
-							info_mes *meses;
 						
 							tipos_energia();
-							printf("\nEstan disponibles los datos de todos los meses de 2021 y 2022.\n\n");
+							printf("\nEstan disponibles los datos de todos los meses de 2019 y 2022.\n\n");
 							printf("Introduce el numero de meses de los que deseas calcular el maximo: ");
 							do
 							{
 								scanf("%i", &num_meses);
 							}
-							while ((num_meses<1)||(num_meses>24*18));//24 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
+							while ((num_meses<1)||(num_meses>48*18));//48 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
 						
 							meses=malloc(sizeof(info_mes)*num_meses);
 							if (meses==NULL)
@@ -359,7 +368,7 @@ int main()
 									printf("Dato %i: ", i+1);
 									scanf("%i %i %i", &meses[i].tipo_energia, &meses[i].anho, &meses[i].mes);
 								}
-								while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2021)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
+								while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2019)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
 							}
 
 							double *datos;
@@ -372,13 +381,13 @@ int main()
 
 							for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energ�a del mes escogido y almacena los datos de todos los meses en un unico vector 
 							{
-								if (meses[i].anho==2021)
+								for (j=0;j<4;j++)
 								{
-									datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes-1)];
+								if (meses[i].anho==(2019+j))
+								{
+								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
+								break;
 								}
-								else
-								{
-									datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes+12-1)];//si el anho escogido es 2022 hay que sumarle al mes 12 unidades para que sea el mes de 2022. Esto es asi debido a la forma en la que se orgaiza la informacion del fichero en la estructura
 								}
 							}
 
@@ -428,11 +437,7 @@ void tipos_energia()
 	printf("\nTIPOS DE ENERGIA\n\n 1- Hidraulica\n 2- Turbinacion bombeo\n 3- Nuclear\n 4- Carbon\n 5- Fuel y Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos no renovables\n 17- Residuos renovables\n 18- Generacion total\n\n");
 }
 
-void meses()
-{
-	printf("\n 1- Enero2021\n 2- Febrero2021\n 3- Marzo2021\n 4- Abril2021\n 5- Mayo2021\n 6- Junio2021\n 7- Julio2021\n 8- Agosto2021\n 9- Septiembre2021\n 10- Octubre2021\n 11- Noviembre2021\n 12- Diciembre2021\n");
-	printf("\n 13- Enero2022\n 14- Febrero2022\n 15- Marzo2022\n 16- Abril2022\n 17- Mayo2022\n 18- Junio2022\n 19- Julio2022\n 20- Agosto2022\n 21- Septiembre2022\n 22- Octubre2022\n 23- Noviembre2022\n 24- Diciembre2022\n");
-}
+
 
 //Función para mostrar los datos del fichero
 char* mostrarDatos ()
