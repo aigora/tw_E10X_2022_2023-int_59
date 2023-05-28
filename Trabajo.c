@@ -6,7 +6,7 @@
 typedef struct
 {
 	char tipo[50];
-	double datos_meses[24];
+	double datos_meses[4][12];//datos_meses[anhos][meses]
 }fichero_esp;
 
 typedef struct
@@ -22,6 +22,8 @@ char* mostrarDatos (void);
 
 double calcularMediaGrupo (char* archivo, char* grupo);
 
+void convertir_matriz_a_vector(double datos[4][12], int filas, int columnas, double vector[]);
+
 double media(double datos[], int tam_vector);
 
 double varianza(double datos[], int tam_vector);
@@ -30,7 +32,7 @@ double varianza(double datos[], int tam_vector);
 
 int main()
 {
-	int i, eleccion;
+	int i, j, eleccion;
 	char grupo[100];
 
 
@@ -48,21 +50,45 @@ int main()
 		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generación de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
-			esp[i].tipo, &esp[i].datos_meses[0], &esp[i].datos_meses[1], &esp[i].datos_meses[2], &esp[i].datos_meses[3], &esp[i].datos_meses[4],
-			&esp[i].datos_meses[5], &esp[i].datos_meses[6], &esp[i].datos_meses[7], &esp[i].datos_meses[8], &esp[i].datos_meses[9],
-			&esp[i].datos_meses[10], &esp[i].datos_meses[11], &esp[i].datos_meses[12], &esp[i].datos_meses[13], &esp[i].datos_meses[14],
-			&esp[i].datos_meses[15], &esp[i].datos_meses[16], &esp[i].datos_meses[17], &esp[i].datos_meses[18], &esp[i].datos_meses[19],
-			&esp[i].datos_meses[20], &esp[i].datos_meses[21], &esp[i].datos_meses[22], &esp[i].datos_meses[23]);
+			esp[i].tipo, &esp[i].datos_meses[2][0], &esp[i].datos_meses[2][1], &esp[i].datos_meses[2][2], &esp[i].datos_meses[2][3], &esp[i].datos_meses[2][4],
+			&esp[i].datos_meses[2][5], &esp[i].datos_meses[2][6], &esp[i].datos_meses[2][7], &esp[i].datos_meses[2][8], &esp[i].datos_meses[2][9],
+			&esp[i].datos_meses[2][10], &esp[i].datos_meses[2][11], &esp[i].datos_meses[3][0], &esp[i].datos_meses[3][1], &esp[i].datos_meses[3][2],
+			&esp[i].datos_meses[3][3], &esp[i].datos_meses[3][4], &esp[i].datos_meses[3][5], &esp[i].datos_meses[3][6], &esp[i].datos_meses[3][7],
+			&esp[i].datos_meses[3][8], &esp[i].datos_meses[3][9], &esp[i].datos_meses[3][10], &esp[i].datos_meses[3][11]);
+		}
+		fclose(fichero);
+	}
+	
+	FILE *fichero_0;
+	//AquÃ­ abrimos el fichero y nos aseguramos de que existe
+	fichero_0 = fopen("generacion_01-01-2019_31-12-2020.csv", "r");
+	if(fichero_0 == NULL)
+	{
+		printf("Error al abrir el archivo\n");
+	}
+	else
+	{
+		//AquÃ­ leemos todos los datos del fichero y los almacenamos en una estructura
+		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generación de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
+		{
+			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
+			esp[i].tipo, &esp[i].datos_meses[0][0], &esp[i].datos_meses[0][1], &esp[i].datos_meses[0][2], &esp[i].datos_meses[0][3], &esp[i].datos_meses[0][4],
+			&esp[i].datos_meses[0][5], &esp[i].datos_meses[0][6], &esp[i].datos_meses[0][7], &esp[i].datos_meses[0][8], &esp[i].datos_meses[0][9],
+			&esp[i].datos_meses[0][10], &esp[i].datos_meses[0][11], &esp[i].datos_meses[1][0], &esp[i].datos_meses[1][1], &esp[i].datos_meses[1][2],
+			&esp[i].datos_meses[1][3], &esp[i].datos_meses[1][4], &esp[i].datos_meses[1][5], &esp[i].datos_meses[1][6], &esp[i].datos_meses[1][7],
+			&esp[i].datos_meses[1][8], &esp[i].datos_meses[1][9], &esp[i].datos_meses[1][10], &esp[i].datos_meses[1][11]);
 		}
 		fclose(fichero);
 	}
     
+    double vector_datos[48];
+	
     //Menu
     int OP;
     printf("_____________________________________________________________\n\n");
 	printf("		    GENERACION DE ENERGIA");
 	printf("\n_____________________________________________________________\n\n\n");
-	printf("En este programa estan almacenados los datos de generacion de electricidad de 2021 y 2022 de todas las fuentes de\nenergia en Espana. Los datos estan organizados en meses.\n\n\n");
+	printf("En este programa estan almacenados los datos de generacion de electricidad entre 2019 y 2022 de todas las fuentes de\nenergia en Espana. Los datos estan organizados en meses.\n\n\n");
     do
     {
 	    do
@@ -137,8 +163,10 @@ int main()
 						}
 						while ((eleccion<1)||(eleccion>18));
 						
-						printf("\nVarianza: %f\n", varianza(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double)));
-						printf("Desviacion tipica: %f\n\n", sqrt(varianza(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double))));
+						convertir_matriz_a_vector(esp[eleccion-1].datos_meses, 4, 12, vector_datos);
+						
+						printf("\nVarianza: %f\n", varianza(vector_datos, 48));
+						printf("Desviacion tipica: %f\n\n", sqrt(varianza(vector_datos, 48)));
 						printf("\n_____________________________________________________________\n\n");
 					}
 					
@@ -148,13 +176,13 @@ int main()
 						info_mes *meses;
 						
 						tipos_energia();
-						printf("\nEstan disponibles los datos de todos los meses de 2021 y 2022.\n\n");
+						printf("\nEstan disponibles los datos de todos los meses entre 2019 y 2022.\n\n");
 						printf("Introduce el numero de meses de los que deseas calcular la varianza: ");
 						do
 						{
 							scanf("%i", &num_meses);
 						}
-						while ((num_meses<1)||(num_meses>24*18));//24 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
+						while ((num_meses<1)||(num_meses>48*18));//48 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
 						
 						meses=malloc(sizeof(info_mes)*num_meses);
 						if (meses==NULL)
@@ -163,7 +191,7 @@ int main()
 							return -1;
 						}
 						
-						printf("\nIntroduce los meses que desees de la forma: tipo_energia anho mes (ejemplo, hidraulica 2021 enero: 1 2021 1)\n");
+						printf("\nIntroduce los meses que desees de la forma: tipo_energia anho mes (ejemplo, hidraulica 2019 enero: 1 2019 1)\n");
 						for(i=0;i<num_meses;i++)//almacena los meses escogidos por el usuario en la variable-estructura meses
 						{
 							do
@@ -171,7 +199,7 @@ int main()
 								printf("Dato %i: ", i+1);
 								scanf("%i %i %i", &meses[i].tipo_energia, &meses[i].anho, &meses[i].mes);
 							}
-							while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2021)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
+							while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2019)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
 						}
 						
 						double *datos;
@@ -184,13 +212,13 @@ int main()
 						
 						for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energï¿½a del mes escogido y almacena los datos de todos los meses en un unico vector 
 						{
-							if (meses[i].anho==2021)
+							for (j=0;j<4;j++)
 							{
-								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes-1)];
+							if (meses[i].anho==(2019+j))
+							{
+								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
+								break;
 							}
-							else
-							{
-								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes+12-1)];//si el anho escogido es 2022 hay que sumarle al mes 12 unidades para que sea el mes de 2022. Esto es asi debido a la forma en la que se orgaiza la informacion del fichero en la estructura
 							}
 						}
 
@@ -307,6 +335,19 @@ double calcularMediaGrupo (char* archivo, char* grupo)
 	}
 
 	return suma/contador;
+}
+
+void convertir_matriz_a_vector(double datos[4][12], int filas, int columnas, double vector[])
+{
+	int i, j, k=0, tam=filas*columnas;
+	for (i=0;i<filas;i++)
+	{
+		for (j=0;j<columnas;j++)
+		{
+			vector[k]=datos[i][j];
+			k++;
+		}
+	}
 }
 
 double media(double datos[], int tam_vector)
