@@ -32,6 +32,7 @@ typedef struct
 }fichero_esp;
 
 char* mostrarDatos (void);
+
 double calcularMediaGrupo (char* archivo, char* grupo);
 
 int main()
@@ -71,12 +72,13 @@ int main()
 	    do
 	    {
 	    	printf("1 - Ver Datos \n");
-	    	printf("2 - Calculos estadísticos \n");
+	    	printf("2 - Calculos estadisticos \n");
 	    	printf("3 - Datos \n");
 	    	printf("4 - Datos \n");
 	    	printf("5 - Salir del menu \n");
 	    	printf("\n Elige una opcion: ");
 	    	scanf("%d", &OP);
+	    	printf("\n_____________________________________________________________\n\n");
 		}
 	    while((OP!=1)&&(OP!=2)&&(OP!=3)&&(OP!=4)&&(OP!=5));
 	   
@@ -85,21 +87,25 @@ int main()
 	    case 1:{
 		    char* resultado = mostrarDatos ();
 			printf("%s", resultado);
+			printf("\n_____________________________________________________________\n\n");
 	        break;}
 	
 	    case 2:
-	        printf("1- Media\n2- Variacion\n3- Desviacion Tipica\n");
-			printf("Selecciona una opcion: ");
+	        printf("1- Media\n2- Varianza\n3- Desviacion Tipica\n");
+			printf("\nSelecciona una opcion: ");
 			scanf("%i", &opcionEstadistica);
-
+			printf("\n_____________________________________________________________\n\n");
+			
 			//Codigo para la media
 			if (opcionEstadistica = 1)
 			{
 				char archivo[] = "fichero_final.txt";
-				printf("\nEscriba el grupo del que desea conocer la media (Si el nombre tiene espacios escribalo asi: ResiduosRenovables): ");
+				printf("\n 1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total");
+				printf("\n\nEscriba el grupo del que desea conocer la media (Si el nombre tiene espacios escribalo asi: ResiduosRenovables): ");
 				scanf("%s", grupo);
 				double resultadoMedia = calcularMediaGrupo (archivo, grupo);
-				printf("La media del grupo %s es: %.2f\n", grupo, resultadoMedia);
+				printf("\nLa media del grupo %s es: %.2f", grupo, resultadoMedia);
+				printf("\n_____________________________________________________________\n\n");
 			}
 	        break;
 	
@@ -128,10 +134,11 @@ char* mostrarDatos ()
 	fichero_esp esp[300];
 	FILE *fichero;
 	fichero = fopen("fichero_final.txt", "r");
-	printf("1- Ver datos de un cierto grupo de energías.\n");
+	printf("1- Ver datos de un cierto grupo de energias.\n");
 	printf("2- Ver todos los datos.\n");
-	printf("Elige una opción: ");
+	printf("\nElige una opcion: ");
 	scanf("%i", &OP);
+	printf("\n_____________________________________________________________\n\n");
 	switch (OP)
 	{
 	case 1:
@@ -185,7 +192,7 @@ double calcularMediaGrupo (char* archivo, char* grupo)
 	FILE* file = fopen("fichero_final.txt", "r");
 	if (file == NULL)
 	{
-		printf("No se puedo abrir el archivo.\n");
+		printf("No se puede abrir el archivo.\n");
 		return 0.0;
 	}
 
