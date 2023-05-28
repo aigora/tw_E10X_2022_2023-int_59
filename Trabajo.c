@@ -179,3 +179,43 @@ char* mostrarDatos ()
 	}
 	fclose(fichero);
 }
+
+double calcularMediaGrupo (char* archivo, char* grupo)
+{
+	FILE* file = fopen("fichero_final.txt", "r");
+	if (file == NULL)
+	{
+		printf("No se puedo abrir el archivo.\n");
+		return 0.0;
+	}
+
+	char linea[1000];
+	double suma = 0.0;
+	int contador = 0;
+
+	while(fgets(linea, sizeof(linea), file) != NULL)
+	{
+		char* parte = strtok(linea, "   ");
+		if(strcmp(parte, grupo) == 0)
+		{
+			parte = strtok(NULL, "   ");
+			while(parte != NULL)
+			{
+				suma += atof(parte);
+				contador++;
+				parte = strtok(NULL, "   ");
+			}
+			break;
+		}
+	}
+
+	fclose(file);
+
+	if(contador == 0)
+	{
+		printf("No se encontró el grupo especificado.");
+		return 0.0;
+	}
+
+	return suma/contador;
+}
