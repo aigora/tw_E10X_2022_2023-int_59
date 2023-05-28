@@ -9,6 +9,13 @@ typedef struct
 	double datos_meses[24];
 }fichero_esp;
 
+typedef struct
+{
+	int tipo_energia;
+	int anho;
+	int mes;
+}info_mes;
+
 void tipos_energia();//funcion para imprimir todos los tipos de energia (se utiliza bastante)
 
 char* mostrarDatos (void);
@@ -21,7 +28,7 @@ double varianza(double datos[], int tam_vector);
 
 int main()
 {
-	int i, j, eleccion;
+	int i, eleccion;
 	char grupo[100];
 
 
@@ -53,6 +60,7 @@ int main()
     printf("_____________________________________________________________\n\n");
 	printf("		    GENERACION DE ENERGIA");
 	printf("\n_____________________________________________________________\n\n\n");
+	printf("En este programa estan almacenados los datos de generacion de electricidad de 2021 y 2022 de todas las fuentes de\nenergia en Espana. Los datos estan organizados en meses.\n\n\n");
     do
     {
 	    do
@@ -109,12 +117,12 @@ int main()
 				{
 					do
 			        {
-			        	printf("¿Que varianza quieres calcular?\n\n1-Varianza total\n2-Por meses\n3-Varios tipos de energia");
-						printf("\n\nElige una opcion: ");
+			        	printf("¿Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n");
+						printf("\nElige una opcion: ");
 						scanf("%i", &OP);
 						printf("\n_____________________________________________________________\n\n");
 					}
-					while((OP<1)||(OP>3));
+					while((OP<1)||(OP>2));
 					
 					if (OP==1)
 					{
@@ -133,10 +141,60 @@ int main()
 					
 					if (OP==2)
 					{
-					}
-					
-					if (OP==3)
-					{
+						int num_meses;
+						info_mes *meses;
+						
+						tipos_energia();
+						printf("\nEstan disponibles los datos de todos los meses de 2021 y 2022.\n\n");
+						printf("Introduce el numero de meses de los que deseas calcular la varianza: ");
+						do
+						{
+							scanf("%i", &num_meses);
+						}
+						while ((num_meses<1)||(num_meses>24*18));//24 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
+						
+						meses=malloc(sizeof(info_mes)*num_meses);
+						if (meses==NULL)
+						{
+							printf("Error: Memoria no disponible");
+							return -1;
+						}
+						
+						printf("\nIntroduce los meses que desees de la forma: tipo_energia anho mes (ejemplo, hidraulica 2021 enero: 1 2021 1)\n");
+						for(i=0;i<num_meses;i++)//almacena los meses escogidos por el usuario en la variable-estructura meses
+						{
+							do
+							{
+								printf("Dato %i: ", i+1);
+								scanf("%i %i %i", &meses[i].tipo_energia, &meses[i].anho, &meses[i].mes);
+							}
+							while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2021)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
+						}
+						
+						double *datos;
+						datos=malloc(sizeof(double)*num_meses);
+						if (datos==NULL)
+						{
+							printf("Error: Memoria no disponible");
+							return -1;
+						}
+						
+						for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energía del mes escogido y almacena los datos de todos los meses en un unico vector 
+						{
+							if (meses[i].anho==2021)
+							{
+								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes-1)];
+							}
+							else
+							{
+								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[(meses[i].mes+12-1)];//si el anho escogido es 2022 hay que sumarle al mes 12 unidades para que sea el mes de 2022. Esto es asi debido a la forma en la que se orgaiza la informacion del fichero en la estructura
+							}
+						}
+
+						printf("\nVarianza: %f\nDesviacion tipica: %f\n\n", varianza(datos, num_meses), sqrt(varianza(datos, num_meses)));
+						
+						free (meses);
+						free (datos);
 					}
 					
 					break;
@@ -163,7 +221,7 @@ int main()
 
 void tipos_energia()
 {
-	printf("\n 1- Hidraulica\n 2- Turbinacion bombeo\n 3- Nuclear\n 4- Carbon\n 5- Fuel y Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos no renovables\n 17- Residuos renovables\n 18- Generacion total\n\n");
+	printf("\nTIPOS DE ENERGIA\n\n 1- Hidraulica\n 2- Turbinacion bombeo\n 3- Nuclear\n 4- Carbon\n 5- Fuel y Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos no renovables\n 17- Residuos renovables\n 18- Generacion total\n\n");
 }
 
 //FunciÃ³n para mostrar los datos del fichero
