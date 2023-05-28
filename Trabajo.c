@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct
 {
 	char tipo[50];
-	float datos_meses[24];
+	double datos_meses[24];
 }fichero_esp;
 
 void tipos_energia();//funcion para imprimir todos los tipos de energia (se utiliza bastante)
@@ -14,7 +15,9 @@ char* mostrarDatos (void);
 
 double calcularMediaGrupo (char* archivo, char* grupo);
 
-double varianza(int datos[]);
+double media(double datos[], int tam_vector);
+
+double varianza(double datos[], int tam_vector);
 
 int main()
 {
@@ -35,7 +38,7 @@ int main()
 		//Aquí leemos todos los datos del fichero y los almacenamos en una estructura
 		for(i=0; i<18; i++)
 		{
-			fscanf(fichero, "%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f",
+			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[0], &esp[i].datos_meses[1], &esp[i].datos_meses[2], &esp[i].datos_meses[3], &esp[i].datos_meses[4],
 			&esp[i].datos_meses[5], &esp[i].datos_meses[6], &esp[i].datos_meses[7], &esp[i].datos_meses[8], &esp[i].datos_meses[9],
 			&esp[i].datos_meses[10], &esp[i].datos_meses[11], &esp[i].datos_meses[12], &esp[i].datos_meses[13], &esp[i].datos_meses[14],
@@ -66,7 +69,7 @@ int main()
 	    	scanf("%d", &OP);
 	    	printf("\n_____________________________________________________________\n\n");
 		}
-	    while((OP!=1)&&(OP!=2)&&(OP!=3)&&(OP!=4)&&(OP!=5));
+	    while((OP<1)||(OP>5));
 	   
 	    switch (OP)
 	    {
@@ -79,12 +82,12 @@ int main()
 	    case 2:
 	        do
 	        {
-	        	printf("1- Media\n2- Varianza\n3- Desviacion Tipica\n");
+	        	printf("1- Media\n2- Varianza y desviacion tipica\n");
 				printf("\nSelecciona una opcion: ");
 				scanf("%i", &OP);
 				printf("\n_____________________________________________________________\n\n");
 			}
-			while((OP!=1)&&(OP!=2)&&(OP!=3));
+			while((OP<1)||(OP>2));
 			
 			
 			//Codigo para la media, varianza y desviacion tipica
@@ -111,19 +114,21 @@ int main()
 						scanf("%i", &OP);
 						printf("\n_____________________________________________________________\n\n");
 					}
-					while((OP!=1)&&(OP!=2)&&(OP!=3));
+					while((OP<1)||(OP>3));
 					
 					if (OP==1)
 					{
 						tipos_energia();
-						printf("Elige un tipo de energ�a: ");
-						scanf("%i", &eleccion);
-						
-						float datos[24];
-						for(i=0;i<24;i++)
+						do
 						{
-							
+							printf("Elige un tipo de energia: ");
+							scanf("%i", &eleccion);	
+							printf("\n_____________________________________________________________\n\n");
 						}
+						while ((eleccion<1)||(eleccion>18));
+						
+						printf("\nVarianza: %f\n", varianza(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double)));
+						printf("Desviacion tipica: %f\n\n", sqrt(varianza(esp[eleccion-1].datos_meses, sizeof(esp[eleccion-1].datos_meses)/sizeof(double))));
 					}
 					
 					if (OP==2)
@@ -134,12 +139,6 @@ int main()
 					{
 					}
 					
-					break;
-				}
-					
-				
-				case 3:
-				{
 					break;
 				}
 			}
@@ -164,7 +163,7 @@ int main()
 
 void tipos_energia()
 {
-	printf("\n 1- Hidraulica\n 2- Turbinacion\n 3- Nuclear\n 4- Carbon\n 5- Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos renovables\n 17- Residuos no renovables\n 18- Generacion total\n\n");
+	printf("\n 1- Hidraulica\n 2- Turbinacion bombeo\n 3- Nuclear\n 4- Carbon\n 5- Fuel y Gas\n 6- Motores Diesel\n 7- Turbinas de gas\n 8- Turbina de vapor\n 9- Ciclo combinado\n 10- Hidroeolica\n 11- Eolica\n 12- Solar fotovoltaica\n 13- Solar termica\n 14- Otras renovables\n 15- Cogeneracion\n 16- Residuos no renovables\n 17- Residuos renovables\n 18- Generacion total\n\n");
 }
 
 //Función para mostrar los datos del fichero
@@ -266,4 +265,30 @@ double calcularMediaGrupo (char* archivo, char* grupo)
 	}
 
 	return suma/contador;
+}
+
+double media(double datos[], int tam_vector)
+{
+	int i;
+	double media=0;
+	for (i=0;i<tam_vector;i++)
+	{
+		media=media+datos[i];
+	}
+	media=media/tam_vector;
+	
+	return media;
+}
+
+double varianza(double datos[], int tam_vector)
+{
+	int i;
+	double varianza=0;
+	for (i=0;i<tam_vector;i++)
+	{
+		varianza=varianza+pow((media(datos,tam_vector)-datos[i]),2);
+	}
+	varianza=varianza/tam_vector;
+	
+	return varianza;
 }
