@@ -41,7 +41,7 @@ int main()
 
 
     fichero_esp esp[18];
-	FILE *fichero;
+	FILE *fichero;//lecctura del fichero con los anhos 2021 y 2022
 	//Aquí abrimos el fichero y nos aseguramos de que existe
 	fichero = fopen("fichero_final.txt", "r");
 	if(fichero == NULL)
@@ -63,7 +63,7 @@ int main()
 		fclose(fichero);
 	}
 	
-	FILE *fichero_0;
+	FILE *fichero_0;//lecctura del fichero con los anhos 2019 y 2020
 	//Aquí abrimos el fichero y nos aseguramos de que existe
 	fichero_0 = fopen("generacion_01-01-2019_31-12-2020.csv", "r");
 	if(fichero_0 == NULL)
