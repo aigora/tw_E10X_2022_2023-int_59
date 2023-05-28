@@ -119,7 +119,7 @@ int main()
 				{
 					do
 			        {
-			        	printf("�Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n3-Volver\n");
+			        	printf("Como las quieres calcular?\n\n1-Varianza y desviacion tipica total de un tipo de fuente\n2-Personalizado. Elegir meses\n3-Volver\n");
 						printf("\nElige una opcion: ");
 						scanf("%i", &OP);
 						printf("\n_____________________________________________________________\n\n");
