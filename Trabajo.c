@@ -236,57 +236,33 @@ char* mostrarDatos ()
 	fichero_esp esp[300];
 	FILE *fichero;
 	fichero = fopen("fichero_final.txt", "r");
-	printf("1- Ver datos de un cierto grupo de energias.\n");
-	printf("2- Ver todos los datos.\n");
-	printf("\nElige una opcion: ");
-	scanf("%i", &OP);
 	printf("\n_____________________________________________________________\n\n");
-	switch (OP)
-	{
-	case 1:
-		//Ver datos por filas
+	
+	//Ver datos por filas
+	tipos_energia();
+	printf(" Datos que quieres ver: ");
+	scanf("%i", &linea_seleccionada);
+	//Si se pasa o se queda corto lo repite
+	while(linea_seleccionada<1 || linea_seleccionada>18)
+    {
 		tipos_energia();
 		printf(" Datos que quieres ver: ");
 		scanf("%i", &linea_seleccionada);
-		//Si se pasa o se queda corto lo repite
-		while (linea_seleccionada < 1)
-		{
-			tipos_energia();
-		    printf(" Datos que quieres ver: ");
-		    scanf("%i", &linea_seleccionada);
-		}
-		while (linea_seleccionada > 18)
-		{
-			tipos_energia();
-		    printf(" Datos que quieres ver: ");
-		    scanf("%i", &linea_seleccionada);
-		}
-		
-		//Aquí esta el codigo para mostrarlo en la terminal
-		while (fgets(linea, 1000, fichero) != NULL)
-		{
-			if(counter == linea_seleccionada)
-			{
-				printf("\n\n");
-				return linea;
-				break;
-			}
-			counter++;
-		}
-		counter = 1;
-	case 2:
-	    //Ver todos los datos 
-		printf("\n\n");
-		while(fgets(linea, 1000, fichero) != NULL)
-		{
-			fgets(linea, 1000, fichero);
-		}
-		return linea;
-		break;
-	default:
-		break;
 	}
-	fclose(fichero);
+		
+	//Aquí esta el codigo para mostrarlo en la terminal
+	while (fgets(linea, 1000, fichero) != NULL)
+	{
+		if(counter == linea_seleccionada)
+		{
+			printf("\n\n");
+			return linea;
+			break;
+		}
+		counter++;
+	}
+	counter = 1;
+    fclose(fichero);
 }
 
 double calcularMediaGrupo (char* archivo, char* grupo)
