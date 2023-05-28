@@ -26,6 +26,8 @@ double media(double datos[], int tam_vector);
 
 double varianza(double datos[], int tam_vector);
 
+
+
 int main()
 {
 	int i, eleccion;
@@ -43,7 +45,7 @@ int main()
 	else
 	{
 		//Aqu√≠ leemos todos los datos del fichero y los almacenamos en una estructura
-		for(i=0; i<18; i++)
+		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaciÛn de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[0], &esp[i].datos_meses[1], &esp[i].datos_meses[2], &esp[i].datos_meses[3], &esp[i].datos_meses[4],
@@ -222,6 +224,8 @@ int main()
 	while (OP!=5);
     return 0;
 }
+
+
 
 void tipos_energia()
 {
