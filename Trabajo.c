@@ -109,7 +109,7 @@ int main()
 				{
 					do
 			        {
-			        	printf("¿Que varianza quieres calcular?\n\n1-Varianza total\n2-Por meses\n3-Varios tipos de energia");
+			        	printf("ï¿½Que varianza quieres calcular?\n\n1-Varianza total\n2-Por meses\n3-Varios tipos de energia");
 						printf("\n\nElige una opcion: ");
 						scanf("%i", &OP);
 						printf("\n_____________________________________________________________\n\n");
@@ -260,7 +260,7 @@ double calcularMediaGrupo (char* archivo, char* grupo)
 
 	if(contador == 0)
 	{
-		printf("No se encontró el grupo especificado.");
+		printf("No se encontrï¿½ el grupo especificado.");
 		return 0.0;
 	}
 
