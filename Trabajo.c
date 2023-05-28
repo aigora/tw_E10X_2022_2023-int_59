@@ -5,7 +5,7 @@
 
 typedef struct
 {
-	char tipo[50]; 
+	char tipo[50];
 	double datos_meses[24];
 }fichero_esp;
 
