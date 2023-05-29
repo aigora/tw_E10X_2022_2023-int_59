@@ -308,7 +308,7 @@ int main()
 								}
 							}
 
-							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maximotot, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", maximotot, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 				
 							break;
@@ -361,7 +361,7 @@ int main()
 								}
 							}
 
-							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", maxi, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");							
 				
 							break;
@@ -400,7 +400,7 @@ int main()
 								}
 							}
 
-							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi_0, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", maxi_0, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 
 							break;
@@ -477,7 +477,7 @@ int main()
 								}
 							}
 
-							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi_1, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", maxi_1, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 
 											
@@ -536,7 +536,7 @@ int main()
 								}
 							}
 
-							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", minimotot, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", minimotot, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 
 							break;
@@ -589,7 +589,7 @@ int main()
 								}
 							}
 
-							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", min, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", min, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 							
 				
@@ -629,7 +629,7 @@ int main()
 								}
 							}
 
-							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", min_0, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", min_0, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 
 							break;
@@ -706,7 +706,7 @@ int main()
 								}
 							}
 
-							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", min_1, informacion[0], informacion[2], informacion[1]);
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", min_1, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 						
 							free (meses_4);
@@ -769,7 +769,40 @@ int main()
 
 				case 2:
 				{
+					int mes100, ano100;
+					float tamanho100[18];
+					float tipo100[18];
+					do
+					{
+						printf("\nIntroduce el mes que desees de la forma: anho mes (ejemplo, 2019 enero: 2019 1)\n");
+						printf("Dato: ");
+						scanf("%i %i", &ano100, &mes100);
+						printf("\n_____________________________________________________________\n\n");
+					} 
+					while ((ano100<2019)||(ano100>2022)||(mes100<1)||(mes100>12));
 					
+					ano100 = ano100 - 2019;
+					for (i=0; i<17; i++)
+					{
+						tamanho100[i] = esp[i].datos_meses[ano100][mes100]/100;
+						
+					}
+
+					printf("Se muestra el diagrama de barras correspondiente a cada tipo de energia en el mes seleccionado. \n");
+					printf("Cada '*' corresponde a 100 Gwh de energia producida. \n\n\n");
+
+					for (i=0; i<17; i++)
+					{
+						printf("%s: ", esp[i]. tipo);
+						for (j=1; j<tamanho100[i]; j++)
+						{
+							printf("*");
+						}
+						printf("\n");
+					}
+
+					printf("\n_____________________________________________________________\n\n");
+
 					break;
 				}
 
