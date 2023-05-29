@@ -113,7 +113,7 @@ int main()
 	    	printf("3 - Analisis de datos\n");
 	    	printf("4 - Diagramas de barras \n");
 	    	printf("5 - Comparacion de datos\n");
-	    	printf("6 -  \n");
+	    	printf("6 - Creacion de ficheros de resultados\n");
 	    	printf("7 - Salir del programa\n");
 	    	printf("\n Elige una opcion: ");
 	    	scanf("%d", &OP);
