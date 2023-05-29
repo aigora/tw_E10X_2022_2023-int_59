@@ -45,7 +45,7 @@ int main()
 	else
 	{
 		//Aqu√≠ leemos todos los datos del fichero y los almacenamos en una estructura
-		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaciÛn de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
+		for(i=0; i<18; i++)//juntamos toda la informacion de generacion en un vector donde cada elemento de este es el valor de generaciÔøΩn de un mes, ordenados los meses en orden cronologico teniendo en cuenta el anho
 		{
 			fscanf(fichero, "%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			esp[i].tipo, &esp[i].datos_meses[0], &esp[i].datos_meses[1], &esp[i].datos_meses[2], &esp[i].datos_meses[3], &esp[i].datos_meses[4],
