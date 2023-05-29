@@ -218,11 +218,11 @@ int main()
 						{
 							for (j=0;j<4;j++)
 							{
-							if (meses[i].anho==(2019+j))
-							{
-								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
-								break;
-							}
+							    if (meses[i].anho==(2019+j))
+							    {
+								    datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
+							    	break;
+							    }
 							}
 						}
 
@@ -320,7 +320,7 @@ int main()
 							printf("\nMaximo: %f\n", maximo(datos, 17));
 							free(datos);
 							free(datos);
-				
+
 							break;
 						}
 
