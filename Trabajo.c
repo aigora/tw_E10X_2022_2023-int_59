@@ -869,21 +869,63 @@ int main()
 			{
 				do
 				{
-					printf("1 - Comparacion general por meses.\n");
-					printf("2 - Comparacion general por a�os.\n");
-					printf("3 - Comparacion personalizada por meses\n");
-					printf("4 - Comparacion personalizada por a�os\n");
-					printf("5 - Comparacion Anual por trimestres\n");
+					printf("1 - Comparacion general por meses de cierta energia.\n");
+					printf("2 - Comparacion general por anhos de cierta energia.\n");
 					printf("\nElige una opcion: ");
 					scanf("%i", &OP);
 					printf("\n_____________________________________________________________\n\n");
 				}
-				while((OP<1)||(OP>5)); 
+				while((OP<1)||(OP>2)); 
 				
 				switch (OP)
 				{
 					case 1:
 						{
+							
+							tipos_energia();
+							do
+							{
+								printf("Los meses apareceran ordenados de mayor a menor generacion de energia.\n\nElige un tipo de energia: ");
+								scanf("%i", &eleccion);	
+								printf("\n_____________________________________________________________\n\n");
+							}
+							while ((eleccion<1)||(eleccion>18));
+							
+							convertir_matriz_a_vector(esp[eleccion-1].datos_meses, 4, 12, vector_datos);
+							
+							ordenar_mayor_menor(vector_datos, 48);
+							
+							for (i=0;i<48;i++)
+							{
+								for (j=0;j<4;j++)
+								{
+									for (k=0;k<12;k++)
+									{
+										if (vector_datos[i]==esp[eleccion-1].datos_meses[j][k])
+										{
+												if (j==0)
+												{
+													printf("%i/2019 >\n", k+1);
+												}
+													
+												if (j==1)
+												{
+													printf("%i/2020 >\n", k+1);
+												}
+													
+												if (j==2)
+												{
+													printf("%i/2021 >\n", k+1);
+												}
+													
+												if (j==3)
+												{
+													printf("%i/2022 >\n", k+1);
+												}
+										}
+									}
+								}
+							}
 							
 							
 							break;
@@ -891,21 +933,62 @@ int main()
 					
 					case 2:
 						{
-							break;
-						}
-						
-					case 3:
-						{
-							break;
-						}
-						
-					case 4:
-						{
-							break;
-						}
-						
-					case 5:
-						{
+							double vector_anhos[4]={0,0,0,0}, vector_auxiliar[4];
+							
+							tipos_energia();
+							do
+							{
+								printf("Los meses apareceran ordenados de mayor a menor generacion de energia.\n\nElige un tipo de energia: ");
+								scanf("%i", &eleccion);	
+								printf("\n_____________________________________________________________\n\n");
+							}
+							while ((eleccion<1)||(eleccion>18));
+							
+							for(i=0;i<12;i++)
+							{
+								vector_anhos[0]=vector_anhos[0]+esp[eleccion-1].datos_meses[0][j];
+								vector_anhos[1]=vector_anhos[1]+esp[eleccion-1].datos_meses[1][j];
+								vector_anhos[2]=vector_anhos[2]+esp[eleccion-1].datos_meses[2][j];
+								vector_anhos[3]=vector_anhos[3]+esp[eleccion-1].datos_meses[3][j];
+							}
+					
+							vector_auxiliar[0]=vector_anhos[0];
+							vector_auxiliar[1]=vector_anhos[1];
+							vector_auxiliar[2]=vector_anhos[2];
+							vector_auxiliar[3]=vector_anhos[3];
+							
+							ordenar_mayor_menor(vector_anhos, 4);
+							
+							for (i=0;i<4;i++)
+							{
+								for (j=0;j<4;j++)
+								{
+									if (vector_anhos[i]==vector_auxiliar[j])
+									{
+										if (j==0)
+										{
+											printf("2019 >\n");
+										}
+											
+										if (j==1)
+										{
+											printf("2020 >\n");
+										}
+											
+										if (j==2)
+										{
+											printf("2021 >\n");
+										}
+											
+										if (j==3)
+										{
+											printf("2022 >\n");
+										}
+									}
+								}
+							}
+								
+							
 							break;
 						}
 				}
@@ -1186,10 +1269,42 @@ double minimo(double datos[], int tam_vector)
 
 void ordenar_mayor_menor(double datos[], int tam_vector)
 {
-	int i;
+	int i, j, k, t;
+	double max;
+	double *vectoraux;
 	
-	for (i=0;i<tam_vector;i++)
+	for (i=tam_vector;i>1;i--)
 	{
-		if (datos[i]>datos[1]);
+		vectoraux=malloc(sizeof(double)*i);
+		if (vectoraux==NULL)
+		{
+			printf("Error: memoria no disponible");
+			break;
+		}
+		else
+		{
+			for (j=tam_vector-i;j<tam_vector;j++)
+			{
+				vectoraux[j-tam_vector+i]=datos[j];
+			}
+			
+			max=maximo(vectoraux, i);
+			
+			for (k=0;k<tam_vector;k++)
+			{
+				if (datos[k]==max)
+				{
+					break;
+				}
+			}
+			
+			for (t=k;t>tam_vector-i;t--)
+			{
+				datos[t]=datos[t-1];
+			}
+			
+			datos[tam_vector-i]=max;
+		}
+		free(vectoraux);
 	}
 }
