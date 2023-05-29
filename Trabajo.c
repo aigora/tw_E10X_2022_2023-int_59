@@ -113,7 +113,7 @@ int main()
 	    	printf("3 - Analisis de datos\n");
 	    	printf("4 - Diagramas de barras \n");
 	    	printf("5 - Comparacion de datos\n");
-	    	printf("6 -  \n");
+	    	printf("6 - Creacion de ficheros de resultados\n");
 	    	printf("7 - Salir del programa\n");
 	    	printf("\n Elige una opcion: ");
 	    	scanf("%d", &OP);
@@ -264,6 +264,10 @@ int main()
 			{  
 				case 1:
 				{
+					informacion[0]=0;
+					informacion[1]=0;
+					informacion[2]=0;
+
 					do
 					{
 			    		printf("Elige los datos a analizar\n\n1- Produccion maxima total\n2- Produccion maxima por meses\n3- Produccion maxima tipo de energia\n4- Produccion maxima especifica");
@@ -276,7 +280,7 @@ int main()
 					{
 						case 1:
 						{
-							float maximotot;
+							double maximotot;
 							maximotot= 0;
 							for (i=0; i<17; i++)
 							{
@@ -308,7 +312,7 @@ int main()
 								}
 							}
 
-							printf("\nEl maximo es: %f GWh, producidos por el tipo %s, a fecha de %d / %d\n", maximotot, esp[informacion[0]].tipo, informacion[2], informacion[1]);
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %s, a fecha de %i / %i\n", maximotot, esp[informacion[0]].tipo, informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 				
 							break;
@@ -838,6 +842,7 @@ int main()
 						for (j=1; j<tamanho[i]; j++)
 						{
 							printf("*");
+
 						}
 						printf("\n");
 					}
@@ -848,8 +853,9 @@ int main()
 					
 					break;
 				}
-	        break;
+	        	break;
 			}
+			break;
 		}
 		case 5:
 			{
