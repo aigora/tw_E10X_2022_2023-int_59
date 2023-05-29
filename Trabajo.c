@@ -114,7 +114,7 @@ int main()
 	    	printf("4 - Diagramas de barras \n");
 	    	printf("5 - Comparacion de datos\n");
 	    	printf("6 - Creacion de ficheros de resultados\n");
-	    	printf("7 - Creacion de fichero de resultados introducidos por el usuario\n");
+	    	printf("7 - Resultados estadisticos introducidos por el usuario\n");
 	    	printf("8 - Salir del programa\n");
 	    	printf("\n Elige una opcion: ");
 	    	scanf("%d", &OP);
@@ -737,7 +737,7 @@ int main()
 	
 	        do
 			{
-			    printf("�Elige una forma de diagrama:\n\n1- Diagrama de meses de 1 anho\n2- Diagrama de los tipos de energia en 1 mes \n3- Diagrama de los 4 anhos");
+			    printf("�Elige una forma de diagrama:\n\n1- Diagrama de meses por meses de 1 anho\n2- Diagrama de los tipos de energia en 1 mes \n3- Diagrama de los 4 anhos");
 				printf("\n\nElige una opcion: ");
 				scanf("%i", &OP);			
 				printf("\n_____________________________________________________________\n\n");
