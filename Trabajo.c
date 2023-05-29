@@ -846,8 +846,9 @@ int main()
 					
 					break;
 				}
-	        break;
+	        	break;
 			}
+			break;
 		}
 		case 5:
 			{
