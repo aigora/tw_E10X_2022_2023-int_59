@@ -796,10 +796,17 @@ int main()
 
 					printf("Se muestra el diagrama de barras correspondiente a cada tipo de energia en el mes seleccionado. \n");
 					printf("Cada '*' corresponde a 100 Gwh de energia producida. \n\n\n");
+					
 
 					for (i=0; i<17; i++)
 					{
-						printf("%s: ", esp[i]. tipo);
+						if(strcmp(esp[i].tipo, "Hidraulica") == 0 || strcmp(esp[i].tipo, "Nuclear") == 0 || strcmp(esp[i].tipo, "Carbon") == 0 || strcmp(esp[i].tipo, "FuelYGas") == 0 || strcmp(esp[i].tipo, "MotoresDiesel") == 0 || strcmp(esp[i].tipo, "TurbinaDeGas") == 0 || strcmp(esp[i].tipo, "Hidroeolica") == 0 || strcmp(esp[i].tipo, "Eolica") == 0 || strcmp(esp[i].tipo, "SolarTermica") == 0 || strcmp(esp[i].tipo, "Cogeneracion") == 0)
+						{
+							printf("%s: \t        ", esp[i]. tipo);
+						}else{
+							printf("%s: \t", esp[i]. tipo);
+						}
+
 						for (j=1; j<tamanho100[i]; j++)
 						{
 							printf("*");
