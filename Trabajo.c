@@ -30,11 +30,13 @@ double varianza(double datos[], int tam_vector);
 
 double maximo(double datos[], int tam_vector);
 
+double minimo(double datos[], int tam_vector);
+
 
 
 int main()
 {
-	int i, j, eleccion;
+	int i, j, k, eleccion;
 	char grupo[100];
 
 
@@ -88,6 +90,7 @@ int main()
     double vector_datos[48];
 	int num_meses;
 	info_mes *meses;
+	int informacion[] = {0,0,0}; //vector para saber la fecha de los datos max y min
 	
     //Menu
     int OP;
@@ -279,7 +282,28 @@ int main()
 								}
 								else{}
 							}
-							printf("\nMaximo: %f\n", maximotot);
+							
+
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == maximotot)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maximotot, informacion[0], informacion[2], informacion[1]);
+							printf("\n_____________________________________________________________\n\n");
 				
 							break;
 						}
@@ -317,9 +341,31 @@ int main()
 								}
 							}
 
-							printf("\nMaximo: %f\n", maximo(datos, 17));
+							double maxi;
+							maxi = maximo(datos, 17);
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == maxi)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi, informacion[0], informacion[2], informacion[1]);
+							printf("\n_____________________________________________________________\n\n");							
+
 							free(datos);
-							free(datos);
+							free(meses);
 				
 							break;
 						}
@@ -337,7 +383,27 @@ int main()
 
 							convertir_matriz_a_vector(esp[eleccion-1].datos_meses, 4, 12, vector_datos);
 
-							printf("\nMaximo: %f\n", maximo(vector_datos, 48));
+							double maxi;
+							maxi = maximo(vector_datos, 48);
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == maxi)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi, informacion[0], informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
 
 							break;
@@ -385,17 +451,38 @@ int main()
 							{
 								for (j=0;j<4;j++)
 								{
-								if (meses[i].anho==(2019+j))
-								{
-								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
-								break;
-								}
+									if (meses[i].anho==(2019+j))
+									{
+										datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
+										break;
+									}
 								}
 							}
 
-							printf("\nMaximo: %f\n", maximo(datos, num_meses));
+							double maxi;
+							maxi = maximo(datos, num_meses);
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == maxi)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi, informacion[0], informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");
-						
+
+											
 							free (meses);
 							free (datos);
 						    
@@ -408,7 +495,236 @@ int main()
 
 				case 2:
 				{
-					//algo
+					do
+					{
+			    		printf("Elige los datos a analizar\n\n1- Produccion minima total\n2- Produccion minima por meses\n3- Produccion minima de un tipo de energia\n4- Produccion minima especifica");
+						printf("\n\nElige una opcion: ");
+						scanf("%i", &OP);			
+						printf("\n_____________________________________________________________\n\n");
+					}
+					while((OP<1)||(OP>4));
+					switch (OP)
+					{
+						case 1:
+						{
+							double minimotot;
+							minimotot= 0;
+							for (i=0; i<17; i++)
+							{
+								convertir_matriz_a_vector(esp[i].datos_meses, 4, 12, vector_datos);
+
+								if ((minimo(vector_datos, 48)) < minimotot)
+								{
+									minimotot = minimo(vector_datos, 48);
+								}
+								else{}
+							}
+
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == minimotot)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", minimotot, informacion[0], informacion[2], informacion[1]);
+							printf("\n_____________________________________________________________\n\n");
+
+							break;
+						}
+
+						case 2:
+						{
+							meses=malloc(sizeof(info_mes)*1);
+							do
+							{
+								printf("\nIntroduce el mes que desees de la forma: anho mes (ejemplo, 2019 enero: 2019 1)\n");
+								printf("Dato: ");
+								scanf("%i %i", &meses[0].anho, &meses[0].mes);
+								printf("\n_____________________________________________________________\n\n");
+							} 
+							while ((meses[0].anho<2019)||(meses[0].anho>2022)||(meses[0].mes<1)||(meses[0].mes>12));
+
+							double *datos;
+							datos = malloc(17);
+
+							if (datos==NULL)
+							{
+							printf("Error: Memoria no disponible");
+							return -1;
+							}
+
+							for (j=0;j<4;j++)
+							{
+								if (meses[0].anho==(2019+j))
+								{
+									for (i=0; i<17; i++)
+									{
+										datos[i]=esp[i].datos_meses[j][meses[0].mes-1];
+										
+									}	
+								}
+							}
+
+							double min;
+							min = minimo(datos, 17);
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == min)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", min, informacion[0], informacion[2], informacion[1]);
+							printf("\n_____________________________________________________________\n\n");
+							
+							free(datos);
+							free(meses);
+				
+							break;
+						}
+
+						case 3:
+						{
+							tipos_energia();
+							do
+							{
+								printf("Elige un tipo de energia: ");
+								scanf("%i", &eleccion);	
+								printf("\n_____________________________________________________________\n\n");
+							}
+							while ((eleccion<1)||(eleccion>18));
+
+							convertir_matriz_a_vector(esp[eleccion-1].datos_meses, 4, 12, vector_datos);
+
+							double min;
+							min = minimo(vector_datos, 48);
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == min)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", min, informacion[0], informacion[2], informacion[1]);
+							printf("\n_____________________________________________________________\n\n");
+
+							break;
+						}
+
+						case 4:
+						{
+						
+							tipos_energia();
+							printf("\nEstan disponibles los datos de todos los meses de 2019 y 2022.\n\n");
+							printf("Introduce el numero de meses de los que deseas calcular el minimo: ");
+							do
+							{
+								scanf("%i", &num_meses);
+							}
+							while ((num_meses<1)||(num_meses>48*18));//48 meses de cada tipo de energia por 18 tipos de energia es el maximo numero de meses que tienes para seleccionar
+						
+							meses=malloc(sizeof(info_mes)*num_meses);
+							if (meses==NULL)
+							{
+							printf("Error: Memoria no disponible");
+							return -1;
+							}	
+
+							printf("\nIntroduce los meses que desees de la forma: tipo_energia anho mes (ejemplo, hidraulica 2021 enero: 1 2021 1)\n");
+							for(i=0;i<num_meses;i++)//almacena los meses escogidos por el usuario en la variable-estructura meses
+							{
+								do
+								{
+									printf("Dato %i: ", i+1);
+									scanf("%i %i %i", &meses[i].tipo_energia, &meses[i].anho, &meses[i].mes);
+								}
+								while ((meses[i].tipo_energia<1)||(meses[i].tipo_energia>18)||(meses[i].anho<2019)||(meses[i].anho>2022)||(meses[i].mes<1)||(meses[i].mes>12));
+							}
+
+							double *datos;
+							datos=malloc(sizeof(double)*num_meses);
+							if (datos==NULL)
+							{
+								printf("Error: Memoria no disponible");
+								return -1;
+							}
+
+							for (i=0;i<num_meses;i++)//traduce la informacion dada por el usuario a el valor de la generacion de energ�a del mes escogido y almacena los datos de todos los meses en un unico vector 
+							{
+								for (j=0;j<4;j++)
+								{
+								if (meses[i].anho==(2019+j))
+								{
+								datos[i]=esp[(meses[i].tipo_energia-1)].datos_meses[j][meses[i].mes-1];
+								break;
+								}
+								}
+							}
+
+							double min;
+							min = minimo(datos, num_meses);
+							for (i=0; i<17; i++)
+							{
+								for (j=0; j<4; j++)
+								{
+									for (k=0; k<12; k++)
+									{
+										if (esp[i].datos_meses[j][k] == min)
+										{
+											informacion[0] = i + 1;
+											informacion[1] = 2019 + j;
+											informacion[2] = k + 1;
+											break;
+										}
+										else{}
+									}
+								}
+							}
+
+							printf("\nEl minimo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", min, informacion[0], informacion[2], informacion[1]);
+							printf("\n_____________________________________________________________\n\n");
+						
+							free (meses);
+							free (datos);
+						    
+							break;
+						}
+
+					}
 					break;
 				}   
 
@@ -571,4 +887,20 @@ double maximo(double datos[], int tam_vector)
 
 	}
 	return maximo;
+}
+
+double minimo(double datos[], int tam_vector)
+{
+	int i; 
+	double minimo = 10000;
+	for (i=0; i<tam_vector; i++)
+	{
+		if (datos[i]< minimo)
+		{
+			minimo = datos[i];
+		}
+		else{}
+
+	}
+	return minimo;
 }
