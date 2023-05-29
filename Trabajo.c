@@ -724,7 +724,8 @@ int main()
 		}
 		
 	    case 4:
-		}
+		{
+	
 	        do
 			{
 			    printf("�Elige una forma de diagrama:\n\n1- Diagrama de meses de 1 anho\n2- Diagrama de los tipos de energia en 1 mes \n3- Diagrama de los 4 anhos");
@@ -750,21 +751,21 @@ int main()
 				case 3:
 				{
 					//calculamos la generacion anual total
-					float años[] = {0,0,0,0};
-					float tamaño[] = {0,0,0,0};
-					int año = 2019;
+					float anhos[] = {0,0,0,0};
+					float tamanho[] = {0,0,0,0};
+					int anho = 2019;
 
 					for (i=0; i<4; i++)
 					{
 						for (j=0; j<12; j++)
 						{
-							años[i]= años[i] + esp[17].datos_meses[i][j];
+							anhos[i]= anhos[i] + esp[17].datos_meses[i][j];
 						}
 					}
 
 					for (i=0; i<4; i++)
 					{
-						tamaño[i]= años[i] / 5000; //cada 5000 Gwh nos devolverá un asterisco
+						tamanho[i]= anhos[i] / 5000; //cada 5000 Gwh nos devolverá un asterisco
 					}
 
 					printf("Se muestra el diagrama de barras correspondiente a cada anho. \n");
@@ -773,8 +774,8 @@ int main()
 
 					for (i=0; i<4; i++)
 					{
-						printf("Anho %d: ", año+i);
-						for (j=1; j<tamaño[i]; j++)
+						printf("Anho %d: ", anho+i);
+						for (j=1; j<tamanho[i]; j++)
 						{
 							printf("*");
 						}
@@ -788,7 +789,8 @@ int main()
 					break;
 				}
 	        break;
-		
+			}
+		}
 		case 5:
 			break;
 			
