@@ -108,12 +108,14 @@ int main()
 	    	printf("2 - Calculos estadisticos \n");
 	    	printf("3 - Analisis de datos\n");
 	    	printf("4 - Datos \n");
-	    	printf("5 - Salir del menu \n");
+	    	printf("5 - \n");
+	    	printf("6 -  \n");
+	    	printf("7 - Salir del programa\n");
 	    	printf("\n Elige una opcion: ");
 	    	scanf("%d", &OP);
 	    	printf("\n_____________________________________________________________\n\n");
 		}
-	    while((OP<1)||(OP>5));
+	    while((OP<1)||(OP>7));
 	   
 	    switch (OP)
 	    {
@@ -723,13 +725,19 @@ int main()
 	    case 4:
 	        //Algo
 	        break;
-	
+		
+		case 5:
+			break;
+			
+		case 6:
+			break;
+		
 	    default:
 	        printf("Fin del programa \n");
 	        break;
 	    }
 	}
-	while (OP!=5);
+	while (OP!=7);
     return 0;
 }
 
