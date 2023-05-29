@@ -38,7 +38,7 @@ void ordenar_mayor_menor(double datos[], int tam_vector);
 
 int main()
 {
-	int i, j, k, eleccion;
+	int i, j, k, eleccion, n;
 	char grupo[100];
 	double solucion, vector_datos_usuario[24];
     char energia_usuario[40];
@@ -114,12 +114,13 @@ int main()
 	    	printf("4 - Diagramas de barras \n");
 	    	printf("5 - Comparacion de datos\n");
 	    	printf("6 - Creacion de ficheros de resultados\n");
-	    	printf("7 - Salir del programa\n");
+	    	printf("7 - Creacion de fichero de resultados introducidos por el usuario\n");
+	    	printf("8 - Salir del programa\n");
 	    	printf("\n Elige una opcion: ");
 	    	scanf("%d", &OP);
 	    	printf("\n_____________________________________________________________\n\n");
 		}
-	    while((OP<1)||(OP>7));
+	    while((OP<1)||(OP>8));
 	   
 	    switch (OP)
 	    {
@@ -915,7 +916,7 @@ int main()
 			
 		case 6:
 			{
-			printf("\n 1- Crear fichero de soluciones\n 2- Crear fichero de soluciones e introducir datos\n");
+			printf("\n 1- Crear fichero de soluciones\n 2- Introducir datos y almacenar las soluciones en un fichero\n");
 			scanf("%i", &OP);
 			switch(OP)
 			{
@@ -945,43 +946,37 @@ int main()
 			                    solucion = minimo(vector_datos, 24);
 			                    fprintf(ficheroesc, ";%.3f", solucion);
 		                         }
+		                         fclose(ficheroesc);
 		                }
 		              break;
 		              }
 		        case 2:
 		        	{
 		        			char archivo[] = "fichero_final.txt";
-	                    ficheroesc = fopen("fichero_de_soluciones.txt", "w");
+	                    ficheroesc = fopen("fichero_de_soluciones_usuario.txt", "w");
 	                    if(ficheroesc == NULL)
 	                        {
 	                        	printf("Error al abrir el fichero\n");
 	                        }
                            	else
                          	{
-		                        fprintf(ficheroesc, "Tipo,Media;Varianza;Desviacion tipica;maximo;minimo");
-	                         	for(i=0;i<18;i++)
-	                         	{
-			                    convertir_matriz_a_vector(esp[i].datos_meses, 4, 12, vector_datos);
-		                     	fprintf(ficheroesc, "\n %s", esp[i].tipo);
-		                       	solucion = media(vector_datos, 24);
-			                    fprintf(ficheroesc, ",%.3f", solucion);
-			                    solucion = varianza(vector_datos, 24);
-			                    fprintf(ficheroesc, ";%.3f", solucion);
-			                    solucion = sqrt(solucion);
-			                    fprintf(ficheroesc, ";%.3f", solucion);
-			                    solucion = maximo(vector_datos, 24);
-			                    fprintf(ficheroesc, ";%.3f", solucion);
-			                    solucion = minimo(vector_datos, 24);
-			                    fprintf(ficheroesc, ";%.3f", solucion);
-			                   }
-
+                         	   fprintf(ficheroesc, "Tipo,Media;Varianza;Desviacion tipica;maximo;minimo");
+                         	   printf("Introduce el numero de anhos q vas a introducir\n");
+                         	   scanf("%i", &n);
+                         	   for(j=0; j<n; j++)
+                         	   {
+			                   printf("Introduzca el tipo de energia\n");
+			                   scanf("%39s", &energia_usuario);
 			                    for(i=0; i<12; i++)
                                	{
-	                             	printf("Introduzca el datos de el mes %i\n", i+1);
+	                             	printf("Introduzca el datos del mes %i\n", i+1);
 		                            scanf("%lf", &vector_datos_usuario[i]);
-                              	}
-                               	printf("Introduzca el tipo de energia\n");
-	                            scanf("%39s", &energia_usuario);
+                                } 
+                                fprintf(ficheroesc, "\n");
+                                if(j != 0)
+                                {
+                                	fprintf(ficheroesc, "\n\n\n");
+								}
 	                            fprintf(ficheroesc,"\n %s", energia_usuario);
 	                            solucion = media(vector_datos_usuario, 12);
 	                            fprintf(ficheroesc, ",%.3f", solucion);
@@ -993,19 +988,42 @@ int main()
 	                            fprintf(ficheroesc, ";%.3f", solucion);
 	                            solucion = minimo(vector_datos_usuario, 12);
 	                            fprintf(ficheroesc, ";%.3f", solucion);
+	                            fclose(ficheroesc);
+	                        }
 		        }
 		        break;
 		}
      }
      break;
 			}
+			case 7:
+				{
+					for(i=0; i<12; i++)
+                    {
+	                    printf("Introduzca el datos del mes %i\n", i+1);
+		                scanf("%lf", &vector_datos_usuario[i]);
+                   	}
+                   	solucion = media(vector_datos_usuario, 12);
+                   	printf("La media es %f\n", solucion);
+                   	solucion = varianza(vector_datos_usuario, 12);
+                   	printf("La varianza es %f\n", solucion);
+                   	 solucion = sqrt(solucion);
+                   	printf("La desviacion tipica es %f\n", solucion);
+                   	solucion = maximo(vector_datos_usuario, 12);
+                   	printf("El maximo es %f\n", solucion);
+                    solucion = minimo(vector_datos_usuario, 12);
+                   	printf("El minimo es %f\n", solucion);
+                   	
+					
+					break;
+				}
 		
 	    default:
 	        printf("Fin del programa \n");
 	        break;
 	    }
 	}
-	while (OP!=7);
+	while (OP!=8);
     return 0;
 }
 
