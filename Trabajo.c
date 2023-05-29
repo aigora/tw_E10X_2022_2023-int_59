@@ -740,13 +740,34 @@ int main()
 			{  
 				case 1:
 				{
-					//algo
+					int ano = 0;
+			        float tamanho_asterisco = 200;
+			        float resultado;
+		        	do
+			        {
+				        printf("Selecciona un a√±o (ej: 2019): ");
+			            scanf("%i", &ano);
+			        } while(ano < 2019 || ano > 2022);
+		
+			        ano = ano - 2019;
+			        for(i = 0; i < 12; i++)
+			        {
+				        printf("El mes %i: ", i + 1);
+
+				        resultado = esp[17].datos_meses[ano][i]/tamanho_asterisco;
+
+				        for(j = 0; j <= resultado; j++)
+				        {
+					        printf("*");
+				        }
+				        printf("\n");
+			        }
 					break;
 				}
 
 				case 2:
 				{
-					//algo
+					
 					break;
 				}
 
@@ -798,9 +819,9 @@ int main()
 				do
 				{
 					printf("1 - Comparacion general por meses.\n");
-					printf("2 - Comparacion general por aÒos.\n");
+					printf("2 - Comparacion general por aÔøΩos.\n");
 					printf("3 - Comparacion personalizada por meses\n");
-					printf("4 - Comparacion personalizada por aÒos\n");
+					printf("4 - Comparacion personalizada por aÔøΩos\n");
 					printf("5 - Comparacion Anual por trimestres\n");
 					printf("\nElige una opcion: ");
 					scanf("%i", &OP);
