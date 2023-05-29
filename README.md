@@ -1,6 +1,6 @@
-# [Título del trabajo]
+# [Trabajo]
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+[Sacar información útil apartir de una serie de datos.]
 
 ## Integrantes del equipo
 
