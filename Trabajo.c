@@ -337,11 +337,9 @@ int main()
 								}
 							}
 
-<<<<<<< HEAD
 							printf("\nMaximo: %f\n", maximo(datos, 17));
 							free(datos);
 							free(datos);
-=======
 							double maxi;
 							maxi = maximo(datos_1, 17);
 							for (i=0; i<17; i++)
@@ -364,7 +362,6 @@ int main()
 
 							printf("\nEl maximo es: %f GWh, producidos por el tipo %d, a fecha de %d / %d\n", maxi, informacion[0], informacion[2], informacion[1]);
 							printf("\n_____________________________________________________________\n\n");							
->>>>>>> parent of 345bf9f (Revert "Merge branch 'master' of https://github.com/aigora/tw_E10X_2022_2023-int_59")
 				
 							break;
 						}
