@@ -743,18 +743,20 @@ int main()
 				case 1:
 				{
 					int ano = 0;
-			        float tamanho_asterisco = 200;
+			        float tamanho_asterisco = 300;
 			        float resultado;
 		        	do
 			        {
 				        printf("Selecciona un año (ej: 2019): ");
 			            scanf("%i", &ano);
 			        } while(ano < 2019 || ano > 2022);
-		
+
+					printf("Se muestra el diagrama de barras correspondiente a cada tipo de energia en el mes seleccionado. \n");
+					printf("Cada '*' corresponde a 300 Gwh de energia producida. \n\n\n");
 			        ano = ano - 2019;
 			        for(i = 0; i < 12; i++)
 			        {
-				        printf("El mes %i: ", i + 1);
+				        printf("El mes %i: \t", i + 1);
 
 				        resultado = esp[17].datos_meses[ano][i]/tamanho_asterisco;
 
@@ -832,7 +834,7 @@ int main()
 
 					for (i=0; i<4; i++)
 					{
-						printf("Anho %d: ", anho+i);
+						printf("Anho %d: \t", anho+i);
 						for (j=1; j<tamanho[i]; j++)
 						{
 							printf("*");
